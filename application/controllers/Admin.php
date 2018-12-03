@@ -21,9 +21,16 @@ class Admin extends CI_Controller {
 	public function index()
 	{
         $this->load->view('admin/partials/header.php');
+        $this->load->view('admin/index.html');
+        $this->load->view('admin/partials/footer.php');
+	}
+	
+	public function login(){
+		$this->load->view('admin/partials/header.php');
         $this->load->view('admin/login.html');
         $this->load->view('admin/partials/footer.php');
-    }
+	}
+
     
     
 }
