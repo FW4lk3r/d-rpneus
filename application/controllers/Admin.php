@@ -46,9 +46,9 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$this->verify_login();
-        $this->load->view('admin/partials/header.php');
+        $this->load->view('admin/partials/header_intern.php');
         $this->load->view('admin/index.html');
-        $this->load->view('admin/partials/footer.php');
+        $this->load->view('admin/partials/footer_intern.php');
 	}
 
 	/* 
@@ -188,6 +188,201 @@ class Admin extends CI_Controller {
 			redirect('admin/login');
 
 	}
+
+	/* 
+		Created: 10/12/2018
+		Load website settings
+	*/
+	public function website(){
+		$this->verify_login();
+		$this->load->model('Admin_Model');
+		$data['dados'] = $this->Admin_Model->getDados();
+		$this->load->view('admin/partials/header_intern.php');
+		$this->load->view('admin/dados_web_admin.php',$data);
+		$this->load->view('admin/partials/footer_intern.php');
+		
+
+	}
+
+	/* 
+		Created: 10/12/2018
+		Process website settings
+	*/
+	public function proc_website(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$copyrights = $this->input->post('copyrights');
+			
+			
+			$this->form_validation->set_rules('copyrights', 'CopyRights', 'required');
+			$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+			$this->form_validation->set_message('required', '{field} é requerido.');
+			
+			if($this->form_validation->run() == FALSE){
+				$this->load->view('admin/partials/header_intern.php');
+				$this->load->view('admin/dados_web_admin.php');
+				$this->load->view('admin/partials/footer_intern.php');
+			} else {
+				$this->load->model('Admin_Model');
+				if($this->Admin_Model->updateDados($copyrights))
+					redirect('admin/website');
+			}
+		} 
+
+	}
+
+	/*
+		Created: 10/12/2018
+		See my profil
+	*/
+	public function profil(){
+		$this->verify_login();
+		$this->load->view('admin/partials/header_intern.php');
+		$this->load->view('admin/profil');
+		$this->load->view('admin/partials/footer_intern.php');
+	}
+	
+	/*
+		Created: 10/12/2018
+		See tires
+	*/
+	public function pneus(){
+		$this->verify_login();
+		$this->load->model('Admin_Model');
+		
+		$data['pneus'] = $this->Admin_Model->getPneus();
+		$data['altura'] = $this->Admin_Model->getAltura();
+		$data['largura'] = $this->Admin_Model->getLargura();
+		$data['diametro'] = $this->Admin_Model->getDiametro();
+		$data['marcas'] = $this->Admin_Model->getMarcas();
+		$this->load->view('admin/partials/header_intern.php');
+		$this->load->view('admin/pneus', $data);
+		$this->load->view('admin/partials/footer_intern.php');
+	}
+	
+	/*
+		Created: 10/12/2018
+		See brands
+	*/
+	public function marcas(){
+		$this->verify_login();
+		$this->load->model('Admin_Model');
+		
+		$data['marcas'] = $this->Admin_Model->getMarcas();
+		$this->load->view('admin/partials/header_intern.php');
+		$this->load->view('admin/marcas', $data);
+		$this->load->view('admin/partials/footer_intern.php');
+	}
+	
+	/*
+		Created: 10/12/2018
+		Create brand
+	*/
+	public function criarMarca(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$marca = $this->input->post('marca');
+			
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->insertMarca($marca, $_SESSION['id']);
+
+			redirect('admin/marcas');
+		}
+	}
+
+	/*
+		Created: 10/12/2018
+		See largura
+	*/
+	public function largura(){
+		$this->verify_login();
+		$this->load->model('Admin_Model');
+		
+		$data['largura'] = $this->Admin_Model->getLargura();
+		$this->load->view('admin/partials/header_intern.php');
+		$this->load->view('admin/largura', $data);
+		$this->load->view('admin/partials/footer_intern.php');
+	}
+	
+	/*
+		Created: 10/12/2018
+		Create largura
+	*/
+	public function criarLargura(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$largura = $this->input->post('largura');
+			
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->insertLargura($largura, $_SESSION['id']);
+
+			redirect('admin/largura');
+		}
+	}
+	
+	/*
+		Created: 10/12/2018
+		Update largura
+	*/
+	public function updateLargura(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$id = $this->input->post('id');
+			$largura = htmlspecialchars($this->input->post('largura'));
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->updateLargura($id, $largura, $_SESSION['id']);
+
+			redirect('admin/largura');
+		}
+	}
+
+	/*
+		Created: 10/12/2018
+		Delete largura
+	*/
+	public function deleteLargura($id){
+		$this->verify_login();
+
+		$this->db->where('id_largura', $id);
+		$this->db->delete('largura');
+
+		redirect('admin/largura');
+	}
+
+	/*
+		Created: 10/12/2018
+		Update brand
+	*/
+	public function updateMarca(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$id = $this->input->post('id');
+			$marca = htmlspecialchars($this->input->post('marca'));
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->updateMarca($id, $marca, $_SESSION['id']);
+
+			redirect('admin/marcas');
+		}
+	}
+
+	/*
+		Created: 10/12/2018
+		Delete brand
+	*/
+	public function deleteMarca($id){
+		$this->verify_login();
+
+		$this->db->where('id_marca', $id);
+		$this->db->delete('marcas');
+
+		redirect('admin/marcas');
+	}
+	
+	
 
 	/*
 		Created: 10/12/2018
