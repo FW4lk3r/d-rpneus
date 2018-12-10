@@ -4,24 +4,38 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>D&R</b>Pneus</a>
+    <a href="<?php echo base_url('admin') ?>"><b>D&R</b>Pneus</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Efectue o Login</p>
-
-    <form action="../../index2.html" method="post">
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+    
+    <form action="<?php echo base_url('admin/proc_login')?>" method="post">
+      
+          <div class="row">
+              <div class="form-group">
+                  <label class="col-md-12">
+                      <?php if($msg !== NULL){?>
+                          <div class="alert <?php echo $ClassMsg;?>" role="alert">
+                              <?= $msg;?>
+                          </div>
+                      <?php }?>
+                  </label> 
+              </div>
+          </div>
+      <?php echo form_error('email'); ?>
+      <div class="form-group has-feedback">  
+        <input type="email" name="email" class="form-control" value="<?php echo set_value('email'); ?>"  placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
+      <?php echo form_error('password'); ?>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-4 ">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+          <button type="submit" name="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
         </div>
         <!-- /.col -->
       </div>
