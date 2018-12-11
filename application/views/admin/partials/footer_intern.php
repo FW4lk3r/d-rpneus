@@ -66,7 +66,16 @@ if(current_url() == base_url('admin/pneus')){?>
       'searching'   : true,
       'ordering'    : true,
       'info'        : false,
-      'autoWidth'   : false
+      'autoWidth'   : false,
+      "pageLength"  : 6,
+      "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": [7]
+      } ],
+      "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese.json"
+      }
     })
    
   })
@@ -74,12 +83,23 @@ if(current_url() == base_url('admin/pneus')){?>
   $('#updatePneus').on('show.bs.modal',function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id') // Extract info from data-* attributes
-    var nome = button.data('nome') 
+    var nome = button.data('nome')
+    var preco = button.data('preco')
+    var largura = button.data('largura')
+    var altura = button.data('altura')
+    var diametro = button.data('diametro') 
+    var marca = button.data('marca') 
     var modal = $(this)
     modal.find('.modal-title').text('Pneu nº: [' + id + ']')
     modal.find('#id').val(id)
-    modal.find('#pneuinput').val(nome)
+    modal.find('#inputName').val(nome)
+    modal.find('#inputPreco').val(preco)
+    modal.find('#largura option').removeAttr('selected').filter('[value=' + largura + ']').attr('selected', true);
+    modal.find('#altura option').removeAttr('selected').filter('[value=' + altura + ']').attr('selected', true);
+    modal.find('#diametro option').removeAttr('selected').filter('[value=' + diametro + ']').attr('selected', true);
+    modal.find('#marca option').removeAttr('selected').filter('[value=' + marca + ']').attr('selected', true);
   })
+  
 </script>
 <?php } ?>
 <?php 
@@ -154,5 +174,79 @@ if(current_url() == base_url('admin/largura')){?>
   
 </script>
 <?php } ?>
+<?php 
+if(current_url() == base_url('admin/altura')){?>
+  <script>
+  $(function () {
+    $('#altura').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : false,
+      'autoWidth'   : false,
+      "pageLength"  : 6,
+      "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": [2,3]
+      } ],
+      "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese.json"
+      }
+    })
+   
+  })
+
+  $('#updateAltura').on('show.bs.modal',function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var nome = button.data('nome') 
+    var modal = $(this)
+    modal.find('.modal-title').text('Altura nº: [' + id + ']')
+    modal.find('#id').val(id)
+    modal.find('#alturainput').val(nome)
+  })
+  
+</script>
+<?php } ?>
+<?php 
+if(current_url() == base_url('admin/diametro')){?>
+  <script>
+  $(function () {
+    $('#diametro').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : false,
+      'autoWidth'   : false,
+      "pageLength"  : 6,
+      "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": [2,3]
+      } ],
+      "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese.json"
+      }
+    })
+   
+  })
+
+  $('#updateDiametro').on('show.bs.modal',function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var nome = button.data('nome') 
+    var modal = $(this)
+    modal.find('.modal-title').text('Diametro nº: [' + id + ']')
+    modal.find('#id').val(id)
+    modal.find('#diametroinput').val(nome)
+  })
+  
+</script>
+<?php } ?>
+
+
 </body>
 </html>

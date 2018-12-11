@@ -122,9 +122,9 @@
         <li><a href="<?= base_url('admin/pneus');?>"><i class="fa fa-road"></i> <span>Pneus</span></a></li>
         <li><a href="<?= base_url('admin/jantes');?>"><i class="fa fa-road"></i> <span>Jantes</span></a></li>
         <li><a href="<?= base_url('admin/marcas');?>"><i class="fa fa-bandcamp"></i> <span>Marcas</span></a></li>
-        <li><a href="<?= base_url('admin/largura');?>"><i class="fa fa-bandcamp"></i> <span>largura</span></a></li>
-        <li><a href="<?= base_url('admin/diametro');?>"><i class="fa fa-bandcamp"></i> <span>Diametro</span></a></li>
-        <li><a href="<?= base_url('admin/altura');?>"><i class="fa fa-bandcamp"></i> <span>Altura</span></a></li>
+        <li><a href="<?= base_url('admin/largura');?>"><i class="fa fa-arrows-alt"></i> <span>largura</span></a></li>
+        <li><a href="<?= base_url('admin/diametro');?>"><i class="fa fa-circle"></i><span>Diametro</span></a></li>
+        <li><a href="<?= base_url('admin/altura');?>"><i class="fa fa-arrows-alt"></i> <span>Altura</span></a></li>
         <li><a href="<?= base_url('admin/definicoes');?>"><i class="fa fa-cog"></i> <span>Dados website</span></a></li>
         
         <li class="header">Administração</li>
