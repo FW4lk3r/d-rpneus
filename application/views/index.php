@@ -7,32 +7,29 @@
                     <form action="#" class="formulario">
                         <div class="form-group">
                                 <label for="exampleSelect1">Largura</label>
-                                <select class="form-control" id="exampleSelect1">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
+                                <select class="form-control" name="largura" id="exampleSelect1">
+                                <?php foreach ($largura as $row)
+                                { ?>
+                                    <option><?= $row->largura ?></option>
+                                <?php }?>
                                 </select>
                         </div>
                         <div class="form-group">
                                 <label for="exampleSelect1">Altura</label>
-                                <select class="form-control" id="exampleSelect1">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
+                                <select class="form-control" name="altura" id="exampleSelect1">
+                                <?php foreach ($altura as $row)
+                                { ?>
+                                    <option><?= $row->altura ?></option>
+                                <?php }?>
                                 </select>
                         </div>
                         <div class="form-group">
                                 <label for="exampleSelect1">Diâmetro</label>
-                                <select class="form-control" id="exampleSelect1">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
+                                <select class="form-control" name="diametro" id="exampleSelect1">
+                                <?php foreach ($diametro as $row)
+                                { ?>
+                                    <option><?= $row->diametro ?></option>
+                                <?php }?>
                                 </select>
                         </div>
                         <button type="submit" class="btn pesquisar">Pesquisar</button>
