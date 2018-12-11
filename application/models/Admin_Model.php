@@ -39,8 +39,45 @@ class Admin_Model extends CI_Model {
     }
 
     public function getPneus(){
-        $result = $this->db->get('pneus');
+        $this->db->select('*');    
+        $this->db->from('pneus');
+        $this->db->join('marcas', 'pneus.id_marca = marcas.id_marca');
+        $this->db->join('altura', 'pneus.altura = altura.id_altura');
+        $this->db->join('diametro', 'pneus.diametro = diametro.id_diametro');
+        $this->db->join('largura', 'pneus.largura = largura.id_largura');
+        $result =  $this->db->get();
         return $result->result();
+    }
+
+    public function insertPneu($dados, $sessao){
+        
+        $data = array(
+            'nome_pneu' => $dados['nome_pneu'],
+            'preco' => $dados['preco'],
+            'largura' => $dados['largura'],
+            'altura' => $dados['altura'],
+            'diametro' => $dados['diametro'],
+            'id_marca' => $dados['marca']
+        );
+    
+        $this->db->insert('pneus',$data);
+        $this->inserirAccao('Inserir', 'pneus', $sessao);
+        return true;
+    }
+
+    public function updatePneus($id, $dados, $sessao){
+        $data = array(
+            'id_pneu' => $id,
+            'nome_pneu' => $dados['nome_pneu'],
+            'preco' => $dados['preco'],
+            'largura' => $dados['largura'],
+            'altura' => $dados['altura'],
+            'diametro' => $dados['diametro'],
+            'id_marca' => $dados['marca']
+        );
+        $this->db->replace('pneus', $data);
+        $this->inserirAccao('Atualizar', 'pneus', $sessao);
+        return true;
     }
 
     public function getLargura(){
@@ -70,13 +107,54 @@ class Admin_Model extends CI_Model {
     }
 
     public function getAltura(){
+        $this->db->order_by('altura','ASC');
         $result = $this->db->get('altura');
         return $result->result();
+    }
+
+    public function insertAltura($altura, $sessao){
+        $data = array(
+            'altura' => $altura
+        );
+    
+        $this->db->insert('altura',$data);
+        $this->inserirAccao('Inserir', 'altura', $sessao);
+        return true;
+    }
+
+    public function updateAltura($id, $altura, $sessao){
+        $data = array(
+            'id_altura' => $id,
+            'altura'  => $altura
+        );
+        $this->db->replace('altura', $data);
+        $this->inserirAccao('Atualizar', 'altura', $sessao);
+        return true;
     }
 
     public function getDiametro(){
         $result = $this->db->get('diametro');
         return $result->result();
+    }
+
+    public function insertDiametro($diametro, $sessao){
+        $data = array(
+            'diametro' => $diametro
+        );
+    
+        $this->db->insert('diametro',$data);
+        $this->inserirAccao('Inserir', 'diametro', $sessao);
+        return true;
+    }
+
+    public function updateDiametro($id, $diametro, $sessao){
+        $data = array(
+            'id_diametro' => $id,
+            'diametro'  => $diametro
+        );
+        $this->db->replace('diametro', $data);
+        $this->inserirAccao('Atualizar', 'diametro', $sessao);
+        return true;
     }
 
     public function inserirAccao($accao,$tipo, $sessao){
@@ -92,181 +170,6 @@ class Admin_Model extends CI_Model {
 
     
 
-    /*
-        Permite inserir dados de um determinado membro do sistema
-    */
-    public function Inserir_Dados($dados){
-        $data = array(
-            'id_utilizador' => ''
-        );
-        $this->db->set($data);
-        $this->db->insert('utilizador',$data);
-       
-        echo $this->db->set('id_utilizador', '')->get_compiled_insert();
-        $this->db->insert('utilizador_comlogin', $dados);
-        return true;
-    }
     
-
-     /*
-        Permite inserir os pontos 
-    */
-    public function Inserir_Pontos($dados){
-        $this->db->insert('pontos',$dados);
-    }
-
-    /*
-        Permite Listar todas as rows de um determinado cliente
-    */
-    public function ListagemDados($id, $Quantidade){
-        $this->db->where('id_utilizador', $id);
-        $this->db->join('estado_pedido', 'estado_pedido.id_epedido = pedidos.id_epedido');
-        $this->db->join('item','item.id_item = pedidos.id_item_fk');
-        //$this->db->join('tipo_pedido','ID_Tipo_Pedido = Tipo_Pedido','inner');
-        $this->db->limit($Quantidade);
-        $this->db->order_by('id_pedido', 'DESC');
-        $result = $this->db->get('pedidos');
-        return $result->result();
-    }
-
-     /*
-        Permite Listar todas as rows de um determinado cliente
-    */
-    public function ListagemDadosFunc($Quantidade){
-        $this->db->join('estado_pedido', 'estado_pedido.id_epedido = pedidos.id_epedido');
-        $this->db->join('item','item.id_item = pedidos.id_item_fk');
-        //$this->db->join('tipo_pedido','ID_Tipo_Pedido = Tipo_Pedido','inner');
-        $this->db->limit($Quantidade);
-        $this->db->order_by('id_pedido', 'DESC');
-        $result = $this->db->get('pedidos');
-        return $result->result();
-    }
-
-    
-    public function ContagemDadosFunc($tipo){
-        $this->db->where('id_epedido',$tipo);
-        $result = $this->db->count_all_results('pedidos');
-        return $result;
-    }
-
- 
-    public function ListagemDadosPagFuncTodos($value, $reg_por_pagina){
-        $this->db->join('estado_pedido', 'estado_pedido.id_epedido = pedidos.id_epedido', 'inner');
-        $this->db->join('item','item.id_item = pedidos.id_item_fk');
-       // $this->db->join('tipo_lixo','ID_Tipo_Lixo = Residuo_Pedido','inner');
-        //$this->db->join('tipo_pedido','ID_Tipo_Pedido = Tipo_Pedido','inner');
-        $this->db->limit($reg_por_pagina, $value);
-        $this->db->order_by('id_pedido', 'DESC');
-        $result = $this->db->get('pedidos');
-        return $result->result();
-    }
-
-     /*
-        Permite Mostrar todas as rows de um determinado cliente para os pedidos
-    */
-    public function ContarRows($id){
-        $this->db->where('id_utilizador', $id);
-        $result = $this->db->count_all_results('pedidos');
-        return $result;
-    }
-
-    public function ContarRowsFunc(){
-        $result = $this->db->count_all_results('pedidos');
-        return $result;
-    }
-
-    /*
-        Permite Mostrar todas as rows de um determinado cliente para os pontos
-    */
-    public function ContarPontos($id){
-        $this->db->select_sum('pontos_ganhos');
-        $this->db->where('id_utilizador',  $id);
-        $result = $this->db->get('pontos')->result();
-        return $result;
-    }
-
-
-    /*
-        Permite Mostrar todas as rows dos pedidos
-    */
-    public function ContarTodasRows(){
-        $result = $this->db->count_all('pedidos');
-        return $result;
-    }
-
-
-    public function ListagemDadosPag($id, $value, $reg_por_pagina){
-        $this->db->where('id_utilizador', $id);
-        $this->db->join('estado_pedido', 'estado_pedido.id_epedido = pedidos.id_epedido', 'inner');
-        $this->db->join('item','item.id_item = pedidos.id_item_fk');
-       // $this->db->join('tipo_lixo','ID_Tipo_Lixo = Residuo_Pedido','inner');
-        //$this->db->join('tipo_pedido','ID_Tipo_Pedido = Tipo_Pedido','inner');
-        $this->db->limit($reg_por_pagina, $value);
-        $this->db->order_by('id_pedido', 'DESC');
-        $result = $this->db->get('pedidos');
-        return $result->result();
-    }
-    
-    public function ListagemDadosPagMobile($id){
-        $this->db->where('id_utilizador', $id);
-        $this->db->join('estado_pedido', 'estado_pedido.id_epedido = pedidos.id_epedido', 'inner');
-        $this->db->join('item','item.id_item = pedidos.id_item_fk');
-        $this->db->order_by('id_pedido', 'DESC');
-        $result = $this->db->get('pedidos');
-        return $result->result();
-    }
-
-     public function ListagemDadosPagMobile2(){
-        $this->db->where('pedidos.id_epedido', 1);
-        $this->db->join('estado_pedido', 'estado_pedido.id_epedido = pedidos.id_epedido', 'inner');
-        $this->db->join('item','item.id_item = pedidos.id_item_fk');
-        $this->db->order_by('pedidos.id_pedido', 'DESC');
-        $result = $this->db->get('pedidos');
-        return $result->result();
-    }
-
-    public function ListagemDadosPagMobile3($id){
-        $this->db->where('pedidos.id_concluido', $id);
-        $this->db->join('estado_pedido', 'estado_pedido.id_epedido = pedidos.id_epedido', 'inner');
-        $this->db->join('item','item.id_item = pedidos.id_item_fk');
-        $this->db->order_by('pedidos.id_pedido', 'DESC');
-        $result = $this->db->get('pedidos');
-        return $result->result();
-    }
-
-    public function Concluir_pedido($id, $data){
-        $this->db->where('id_pedido', $id);
-        $this->db->update('pedidos', $data);
-    }
-
-     public function Concluir_pedidoSite($id, $data){
-        $this->db->where('id_pedido', $id);
-        $this->db->update('pedidos', $data);
-    }
-
-
-
-/*
-SELECT  `utilizador_comlogin`.nome_u, SUM(  `pontos_ganhos` ) AS  `POINTS` 
-FROM  `pontos` 
-JOIN  `utilizador_comlogin` ON  `pontos`.id_utilizador =  `utilizador_comlogin`.id_utilizador
-GROUP BY  `utilizador_comlogin`.nome_u
-ORDER BY  `POINTS` DESC 
-LIMIT 0 , 30
-
-*/
-
-
-    public function Ranking($inicio, $fim){
-            $this->db->select('utilizador_comlogin.nome_u, SUM(pontos_ganhos) AS Pontos');
-            $this->db->join('utilizador_comlogin', 'pontos.id_utilizador = utilizador_comlogin.id_utilizador');
-            //$this->db->select_sum('pontos_ganhos', 'Pontos')
-            $this->db->group_by('utilizador_comlogin.nome_u'); 
-            $this->db->order_by('Pontos', 'DESC');
-           
-            $this->db->limit($fim,$inicio );
-            $result = $this->db->get('pontos');
-            return $result->result();
-        }
-
 }
+    

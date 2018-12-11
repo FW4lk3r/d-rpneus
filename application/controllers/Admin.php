@@ -244,21 +244,83 @@ class Admin extends CI_Controller {
 	
 	/*
 		Created: 10/12/2018
-		See tires
+		See pneus
 	*/
 	public function pneus(){
 		$this->verify_login();
 		$this->load->model('Admin_Model');
 		
+		$data['pneusListados'] = $this->Admin_Model->getPneus();
+
 		$data['pneus'] = $this->Admin_Model->getPneus();
 		$data['altura'] = $this->Admin_Model->getAltura();
 		$data['largura'] = $this->Admin_Model->getLargura();
 		$data['diametro'] = $this->Admin_Model->getDiametro();
 		$data['marcas'] = $this->Admin_Model->getMarcas();
+
 		$this->load->view('admin/partials/header_intern.php');
 		$this->load->view('admin/pneus', $data);
 		$this->load->view('admin/partials/footer_intern.php');
 	}
+
+	/*
+		Created: 10/12/2018
+		Create pneu
+	*/
+	public function criarPneus(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$dados['nome_pneu'] = $this->input->post('nome_pneu');
+			$dados['preco']  = $this->input->post('preco');
+			$dados['diametro']  = $this->input->post('diametro');
+			$dados['largura']  = $this->input->post('largura');
+			$dados['altura']  = $this->input->post('altura');
+			$dados['marca']  = $this->input->post('marca');
+			
+			
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->insertPneu($dados, $_SESSION['id']);
+
+			redirect('admin/pneus');
+		}
+	}
+
+	/*
+		Created: 10/12/2018
+		Update pneu
+	*/
+	public function updatePneus(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$id = $this->input->post('id');
+			$dados['nome_pneu'] = $this->input->post('nome_pneu');
+			$dados['preco']  = $this->input->post('preco');
+			$dados['diametro']  = $this->input->post('diametro');
+			$dados['largura']  = $this->input->post('largura');
+			$dados['altura']  = $this->input->post('altura');
+			$dados['marca']  = $this->input->post('marca');
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->updatePneus($id, $dados, $_SESSION['id']);
+
+			redirect('admin/pneus');
+		}
+	}
+
+	/*
+		Created: 11/12/2018
+		Delete largura
+	*/
+	public function deletePneu($id){
+		$this->verify_login();
+
+		$this->db->where('id_pneu', $id);
+		$this->db->delete('pneus');
+
+		redirect('admin/pneus');
+	}
+
 	
 	/*
 		Created: 10/12/2018
@@ -350,6 +412,128 @@ class Admin extends CI_Controller {
 		$this->db->delete('largura');
 
 		redirect('admin/largura');
+	}
+
+	/*
+		Created: 10/12/2018
+		See altura
+	*/
+	public function altura(){
+		$this->verify_login();
+		$this->load->model('Admin_Model');
+		
+		$data['altura'] = $this->Admin_Model->getAltura();
+		$this->load->view('admin/partials/header_intern.php');
+		$this->load->view('admin/altura', $data);
+		$this->load->view('admin/partials/footer_intern.php');
+	}
+	
+	/*
+		Created: 10/12/2018
+		Create altura
+	*/
+	public function criarAltura(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$altura = $this->input->post('altura');
+			
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->insertAltura($altura, $_SESSION['id']);
+
+			redirect('admin/altura');
+		}
+	}
+	
+	/*
+		Created: 10/12/2018
+		Update altura
+	*/
+	public function updateAltura(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$id = $this->input->post('id');
+			$altura = htmlspecialchars($this->input->post('altura'));
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->updateAltura($id, $altura, $_SESSION['id']);
+
+			redirect('admin/altura');
+		}
+	}
+
+	/*
+		Created: 10/12/2018
+		Delete altura
+	*/
+	public function deleteAltura($id){
+		$this->verify_login();
+
+		$this->db->where('id_altura', $id);
+		$this->db->delete('altura');
+
+		redirect('admin/altura');
+	}
+
+	/*
+		Created: 10/12/2018
+		See diametro
+	*/
+	public function diametro(){
+		$this->verify_login();
+		$this->load->model('Admin_Model');
+		
+		$data['diametro'] = $this->Admin_Model->getDiametro();
+		$this->load->view('admin/partials/header_intern.php');
+		$this->load->view('admin/diametro', $data);
+		$this->load->view('admin/partials/footer_intern.php');
+	}
+	
+	/*
+		Created: 10/12/2018
+		Create diametro
+	*/
+	public function criarDiametro(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$diametro = $this->input->post('diametro');
+			
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->insertDiametro($diametro, $_SESSION['id']);
+
+			redirect('admin/diametro');
+		}
+	}
+	
+	/*
+		Created: 10/12/2018
+		Update diametro
+	*/
+	public function updateDiametro(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$id = $this->input->post('id');
+			$diametro = htmlspecialchars($this->input->post('diametro'));
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->updateDiametro($id, $diametro, $_SESSION['id']);
+
+			redirect('admin/diametro');
+		}
+	}
+
+	/*
+		Created: 10/12/2018
+		Delete diametro
+	*/
+	public function deleteDiametro($id){
+		$this->verify_login();
+
+		$this->db->where('id_diametro', $id);
+		$this->db->delete('diametro');
+
+		redirect('admin/diametro');
 	}
 
 	/*
