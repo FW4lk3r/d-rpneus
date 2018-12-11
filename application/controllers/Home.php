@@ -20,8 +20,12 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->model('Front_Model');
+		$dados['altura'] = $this->Front_Model->getAltura();
+		$dados['diametro'] = $this->Front_Model->getDiametro();
+		$dados['largura'] = $this->Front_Model->getLargura();
         $this->load->view('header');
-        $this->load->view('index');
+        $this->load->view('index', $dados);
         $this->load->view('footer');
     }
     
