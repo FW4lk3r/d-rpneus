@@ -79,69 +79,74 @@
                 <h4 class="modal-title">Criar pneu</h4>
               </div>
               <div class="modal-body">
-              <form action="<?= base_url('admin/criarPneus');?>" method="POST" class="form-horizontal">
-                  <div class="form-group">
-                    <label for="inputName" name="pneu" class="col-sm-2 control-label">Nome </label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" name="nome_pneu" id="inputName" placeholder="Nome pneu">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputName" name="pneu" class="col-sm-2 control-label">Preço </label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" name="preco" id="inputName" placeholder="Preço (0.00)">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputName" name="pneu" class="col-sm-2 control-label">Largura </label>
-
-                    <div class="col-sm-10">
-                        <select class="form-control select2" name="largura" style="width: 100%;">
-                            <?php foreach ($largura as $row)
-                            { ?>
-                                <option value="<?= $row->id_largura?>"><?= $row->largura ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                  </div>  
-                  <div class="form-group">
-                    <label for="inputName" name="pneu" class="col-sm-2 control-label">Altura </label>
-
-                    <div class="col-sm-10">
-                        <select class="form-control select2" name="altura" style="width: 100%;">
-                            <?php foreach ($altura as $row)
-                            { ?>
-                                <option value="<?= $row->id_altura ?>"><?= $row->altura ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                  </div>  
-                  <div class="form-group">
-                    <label for="inputName" name="pneu" class="col-sm-2 control-label">Diametro </label>
-
-                    <div class="col-sm-10">
-                        <select class="form-control select2" name="diametro" style="width: 100%;">
-                            <?php foreach ($diametro as $row)
-                            { ?>
-                                <option value="<?= $row->id_diametro ?>"><?= $row->diametro ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                  </div>  
-                  <div class="form-group">
-                    <label for="inputName" name="pneu" class="col-sm-2 control-label">Marca </label>
-
-                    <div class="col-sm-10">
-                        <select class="form-control select2" name="marca" style="width: 100%;">
-                            <?php foreach ($marcas as $row)
-                            { ?>
-                                <option value="<?= $row->id_marca ?>"><?= $row->marca ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                  </div>  
+                  <form action="<?= base_url('admin/criarPneus');?>" method="POST" class="form-horizontal">
+                      <div class="form-group">
+                        <label for="inputName" name="pneu" class="col-sm-2 control-label">Nome </label>
+    
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="nome_pneu" id="inputName" placeholder="Nome pneu">
+                        </div>
+                       
+                      </div>
+                      <div class="form-group">
+                        <label for="inputName" name="pneu" class="col-sm-2 control-label">Preço </label>
+    
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="preco" id="inputName" placeholder="Preço (0.00)">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputName" name="pneu" class="col-sm-2 control-label">Largura </label>
+    
+                        <div class="col-sm-10">
+                            <select class="form-control select2" name="largura" style="width: 100%;">
+                                <?php foreach ($largura as $row)
+                                { ?>
+                                    <option value="<?= $row->id_largura?>"><?= $row->largura ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                      </div>  
+                      <div class="form-group">
+                        <label for="inputName" name="pneu" class="col-sm-2 control-label">Altura </label>
+    
+                        <div class="col-sm-10">
+                            <select class="form-control select2" name="altura" style="width: 100%;">
+                                <?php foreach ($altura as $row)
+                                { ?>
+                                    <option value="<?= $row->id_altura ?>"><?= $row->altura ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                      </div>  
+                      <div class="form-group">
+                        <label for="inputName" name="pneu" class="col-sm-2 control-label">Diametro </label>
+    
+                        <div class="col-sm-10">
+                            <select class="form-control select2" name="diametro" style="width: 100%;">
+                                <?php foreach ($diametro as $row)
+                                { ?>
+                                    <option value="<?= $row->id_diametro ?>"><?= $row->diametro ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                      </div>  
+                      <div class="form-group">
+                        <label for="inputName" name="pneu" class="col-sm-2 control-label">Marca </label>
+    
+                        <div class="col-sm-10">
+                            <select class="form-control select2" name="marca" style="width: 100%;">
+                                <?php foreach ($marcas as $row)
+                                { ?>
+                                    <option value="<?= $row->id_marca ?>"><?= $row->marca ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputFile" class="col-sm-2 control-label">Fotográfia</label>
+                        <input type="file" id="exampleInputFile" class="form-control-file">
+                      </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
