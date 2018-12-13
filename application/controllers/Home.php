@@ -24,6 +24,7 @@ class Home extends CI_Controller {
 		$dados['altura'] = $this->Front_Model->getAltura();
 		$dados['diametro'] = $this->Front_Model->getDiametro();
 		$dados['largura'] = $this->Front_Model->getLargura();
+		$dados['pneus'] = $this->Front_Model->getPneus();
         $this->load->view('header');
         $this->load->view('index', $dados);
         $this->load->view('footer');
