@@ -4,7 +4,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo base_url('admin') ?>"><b>D&R</b>Pneus</a>
+    <a href="<?php echo base_url('admin') ?>"><img src="<?= base_url('assets/img/logo.png');?>" width="300" alt="Logotipo"></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
