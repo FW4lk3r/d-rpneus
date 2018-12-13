@@ -46,8 +46,13 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$this->verify_login();
+		$this->load->model('Admin_Model');
+		$dados['marcas'] = $this->Admin_Model->getCount('marcas');
+		$dados['pneus'] = $this->Admin_Model->getCount('pneus');
+		//$dados['jantes'] = $this->Admin_Model->getCountJantes();
+		
         $this->load->view('admin/partials/header_intern.php');
-        $this->load->view('admin/index.html');
+        $this->load->view('admin/index.php', $dados);
         $this->load->view('admin/partials/footer_intern.php');
 	}
 
@@ -93,7 +98,7 @@ class Admin extends CI_Controller {
         else{
             $data['msg'] = NULL;
         }
-        $this->load->view('admin/login.html', $data);
+        $this->load->view('admin/login', $data);
         $this->load->view('admin/partials/footer.php');
 	}
 
@@ -149,7 +154,7 @@ class Admin extends CI_Controller {
 				else{
 					$data['msg'] = NULL;
 				}
-				$this->load->view('admin/login.html', $data);
+				$this->load->view('admin/login', $data);
 				$this->load->view('admin/partials/footer.php');
 			} else {
 				$this->db->where('password', $password);
@@ -171,7 +176,7 @@ class Admin extends CI_Controller {
 					$this->load->view('admin/partials/header.php');
 					$data['msg'] = '<center>Os dados inseridos não estão corretos tente novamente!</center>';
 					$data['ClassMsg'] = 'alert-warning';
-					$this->load->view('admin/login.html', $data);
+					$this->load->view('admin/login', $data);
 					$this->load->view('admin/partials/footer.php');
 				}
 			}
@@ -407,7 +412,7 @@ class Admin extends CI_Controller {
 	*/
 	public function deleteLargura($id){
 		$this->verify_login();
-
+		
 		$this->db->where('id_largura', $id);
 		$this->db->delete('largura');
 
