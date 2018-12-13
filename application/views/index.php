@@ -78,121 +78,37 @@
             </div>
         
         <div class="row second_line">
-            <div class="col-md-3 padding-0">
-                <figure class="pneus">
-                    <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
-                    <figcaption>
-                        <h2>Características<p>Pneu</p></h2>
-                        <p>Largura:</p>
-                        <p>Altura:</p>
-                        <p>Diâmetro:</p>
-                    </figcaption>           
-                </figure>
-                <p class="titulo">Marca</p>
-                <p class="subtitulo">Nome do Pneu</p>
-            </div>
-            <div class="col-md-3 padding-0">
-                <figure class="pneus">
-                    <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
-                    <figcaption>
-                        <h2>Características<p>Pneu</p></h2>
-                        <p>Largura:</p>
-                        <p>Altura:</p>
-                        <p>Diâmetro:</p>
-                    </figcaption>           
-                </figure>
-                <p class="titulo">Marca</p>
-                <p class="subtitulo">Nome do Pneu</p>
-            </div>
-            <div class="col-md-3 padding-0">
-                <figure class="pneus">
-                    <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
-                    <figcaption>
-                        <h2>Características<p>Pneu</p></h2>
-                        <p>Largura:</p>
-                        <p>Altura:</p>
-                        <p>Diâmetro:</p>
-                    </figcaption>           
-                </figure>
-                <p class="titulo">Marca</p>
-                <p class="subtitulo">Nome do Pneu</p>
-            </div>
-            <div class="col-md-3 padding-0">
-                <figure class="pneus">
-                    <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
-                    <figcaption>
-                        <h2>Características<p>Pneu</p></h2>
-                        <p>Largura:</p>
-                        <p>Altura:</p>
-                        <p>Diâmetro:</p>
-                    </figcaption>           
-                </figure>
-                    <div class="texto">
-                            <p class="titulo">Marca</p>
-                            <p class="subtitulo">Nome do Pneu</p>
-                    </div>
-                
-            </div>
+            <?php foreach ($pneus as $row)
+            { ?>
+                <div class="col-md-3 margin-0">
+                    <figure class="pneus">
+                        <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
+                        <figcaption>
+                            <h2>Características</h2>
+                            <div class="row" >
+                                <div class="col-lg-6 information" >Largura</div>
+                                <div class="col-lg-6 information"><?= $row->largura?></div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-lg-6 information" >Altura</div>
+                                <div class="col-lg-6 information"><?= $row->altura?></div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-lg-6 information" >Diâmetro</div>
+                                <div class="col-lg-6 information"><?= $row->diametro?></div>
+                            </div>
+                        </figcaption>           
+                    </figure>
+                    <p class="titulo"><?= $row->marca?></p>
+                    <p class="subtitulo"><?= $row->nome_pneu?></p>
+                </div>
+            <?php }?>
+            
             
             
     </div>
    
-    <div class="row second_line">
-        <div class="col-md-3 padding-0">
-            <figure class="pneus">
-                <img src="<?= base_url('assets/img/pneusNovos.jpg')?>" alt="pneu"/>
-                <figcaption>
-                    <h2>Características<p>Pneu</p></h2>
-                    <p>Largura:</p>
-                    <p>Altura:</p>
-                    <p>Diâmetro:</p>
-                </figcaption>           
-            </figure>
-                <div class="texto">
-                        <p class="titulo">Marca</p>
-                        <p class="subtitulo">Nome do Pneu</p>
-                </div> 
-        </div>
-        <div class="col-md-3 padding-0">
-            <figure class="pneus">
-                <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
-                <figcaption>
-                    <h2>Características<p>Pneu</p></h2>
-                    <p>Largura:</p>
-                    <p>Altura:</p>
-                    <p>Diâmetro:</p>
-                </figcaption>           
-            </figure>
-            <p class="titulo">Marca</p>
-            <p class="subtitulo">Nome do Pneu</p>
-        </div>
-        <div class="col-md-3 padding-0">
-            <figure class="pneus">
-                <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
-                <figcaption>
-                    <h2>Características<p>Pneu</p></h2>
-                    <p>Largura:</p>
-                    <p>Altura:</p>
-                    <p>Diâmetro:</p>
-                </figcaption>           
-            </figure>
-            <p class="titulo">Marca</p>
-            <p class="subtitulo">Nome do Pneu</p>
-        </div>
-        <div class="col-md-3 padding-0">
-            <figure class="pneus">
-                <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
-                <figcaption>
-                    <h2>Características<p>Pneu</p></h2>
-                    <p>Largura:</p>
-                    <p>Altura:</p>
-                    <p>Diâmetro:</p>
-                </figcaption>           
-            </figure>
-            <p class="titulo">Marca</p>
-            <p class="subtitulo">Nome do Pneu</p>
-        </div>
-        <div class="row example_div">
+      <!--   <div class="row example_div">
             <div class="col-md-12">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
@@ -214,7 +130,7 @@
                     </ul>
                   </nav>
             </div>
-        </div>
+        </div> -->
         
         
         
@@ -232,7 +148,7 @@
             </div>
         
         <div class="row second_line">
-            <div class="col-md-3 padding-0">
+            <div class="col-md-3 margin-0">
                 <figure class="pneus">
                     <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
                     <figcaption>
