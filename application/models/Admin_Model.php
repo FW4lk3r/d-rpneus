@@ -168,6 +168,10 @@ class Admin_Model extends CI_Model {
         return true;
     }
 
+    public function getCount($tipe){
+        return $this->db->count_all($tipe);
+    }
+
     
 
     
