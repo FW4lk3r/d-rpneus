@@ -169,6 +169,7 @@ class Admin extends CI_Controller {
 						$dados['email'] = $data['membro'][0]->email;
 						$dados['cargo'] = $data['membro'][0]->cargo;
 						$dados['created_at'] = $data['membro'][0]->created_at;
+						$dados['profil-img'] = $data['membro'][0]->path_image;
 						$dados['logged'] = true;
 						$this->session->set_userdata($dados);
 						redirect('admin');
@@ -242,8 +243,18 @@ class Admin extends CI_Controller {
 	*/
 	public function profil(){
 		$this->verify_login();
+		$this->load->model('Admin_Model');
+		
+		$dados['accaoDia'] = $this->Admin_Model->getAccaoPorDia($_SESSION['id']);
+		foreach($dados['accaoDia'] as $row){
+			$row->accao = $this->Admin_Model->getAccao($_SESSION['id'],$row->created_at);
+		}
+
+		$dados['perfil'] = $this->Admin_Model->getDadosPerfil();
+		
+
 		$this->load->view('admin/partials/header_intern.php');
-		$this->load->view('admin/profil');
+		$this->load->view('admin/profil', $dados);
 		$this->load->view('admin/partials/footer_intern.php');
 	}
 	
@@ -580,7 +591,47 @@ class Admin extends CI_Controller {
 	public function logout(){
         $this->session->sess_destroy();
         redirect('admin/login');
-    }
+	}
+	
+	/*
+		Created: 10/12/2018
+		Uploading system
+	*/
+	public function do_upload()
+	{
+		$config['upload_path']          = 'assets/uploads/';
+		$config['allowed_types']        = 'jpeg|jpg|png';
+		$config['max_size']             = 100000;
+		$config['max_width']            = 3000;
+		$config['max_height']           = 2000;
+
+		$this->load->library('upload', $config);
+
+		//alterar nome da nova foto
+		
+		
+		if ($this->upload->do_upload('userfile'))
+		{
+			$this->load->model('Admin_Model');
+
+			//recuperar o nome da antiga foto
+			$nome_antigo = $this->Admin_Model->getPathFotoPerfil($_SESSION['id']);
+			
+			//fazer o delete da antiga foto
+			if($nome_antigo[0]->path_image !== 'generic-user.png')
+				unlink('assets/uploads/'.$nome_antigo[0]->path_image); 
+			
+			//inserir a nova path na base de dados
+			$dados = $this->upload->data();
+			$this->Admin_Model->UpdateProfilImg($dados['file_name'], $_SESSION['id']);
+
+			//update sessao imagem
+			$_SESSION['profil-img'] = $dados['file_name'];
+			//fazer o redirect
+			redirect('admin/profil');
+		}
+		
+	}
     
     
 }
