@@ -15,7 +15,7 @@
                 <div class="container before_nav">
                             <div class="row">
                                 <div class="col-md-4">
-                                        <img src="<?= base_url('assets/img/logo.png');?>" alt="logo" class="logo"/>
+                                        <a href="<?= base_url()?>"><img src="<?= base_url('assets/img/logo.png');?>" alt="logo" class="logo"/></a>
                                 </div>
                                 <div class="col-md-4 icon">
                                                 <span class="glyphicon glyphicon-earphone telefone"></span>

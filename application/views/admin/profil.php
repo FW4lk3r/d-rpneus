@@ -9,7 +9,7 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/dist/img/user4-128x128.jpg');?>" alt="User profile picture">
+              <img class="profile-user-img img-responsive" style="object-fit: cover;" src="<?php echo base_url('assets/uploads/'. $perfil[0]->path_image);?>" alt="User profile picture">
 
               <h3 class="profile-username text-center"><?= $_SESSION['nome']?></h3>
 
@@ -26,10 +26,12 @@
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Fotografia</b> <a href="#" class="pull-right"><button class="btn btn-info">Mudar</button></a>
+                  <b>Fotografia</b> <a href="#" class="pull-right">
+                  <button class="btn btn-info" data-toggle="modal" data-target="#updateFoto" >Mudar</button></a>
                 </li>
                 <li class="list-group-item">
-                  <b>Palavra-passe</b> <a href="#" class="pull-right"><button class="btn btn-info">Mudar</button></a>
+                  <b>Palavra-passe</b> <a href="#" class="pull-right">
+                  <button class="btn btn-info" data-toggle="modal" data-target="#updatePass" >Mudar</button></a>
                 </li>
                 <li class="list-group-item">
                   <b>Dados inseridos</b> <a class="pull-right">xxxx</a>
@@ -56,91 +58,40 @@
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">
                   <!-- timeline time label -->
-                  <li class="time-label">
-                        <span class="bg-red">
-                          10 Feb. 2014
-                        </span>
-                  </li>
-                  <!-- /.timeline-label -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-envelope bg-blue"></i>
+                  <?php 
+                  
+              
+                  foreach($accaoDia as $row){ 
+                   
+                    ?>
+                    
+                    <li class="time-label">
+                      <span class="bg-red">
+                        <?= date('d-m-Y', strtotime($row->created_at)); ?>
+                      </span>
+                    </li>
+                    <?php                    
+                     foreach($row->accao as $dados){
+                        
+                        if(date("Y-m-d",strtotime($row->created_at)) == date("Y-m-d", strtotime($dados->created_at)) )
+                        { 
+                         ?>
+                        <li>
+                          <i class="fa fa-envelope bg-blue"></i>
 
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                          <div class="timeline-item">
+                            <span class="time"><i class="fa fa-clock-o"></i> <?= date("H:i", strtotime($dados->created_at))?></span>
 
-                      <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                      <div class="timeline-body">
-                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                        quora plaxo ideeli hulu weebly balihoo...
-                      </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs">Read more</a>
-                        <a class="btn btn-danger btn-xs">Delete</a>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-user bg-aqua"></i>
-
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-                      <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                      </h3>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-comments bg-yellow"></i>
-
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-                      <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                      <div class="timeline-body">
-                        Take me to your leader!
-                        Switzerland is small and neutral!
-                        We are more like Germany, ambitious and misunderstood!
-                      </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <!-- timeline time label -->
-                  <li class="time-label">
-                        <span class="bg-green">
-                          3 Jan. 2014
-                        </span>
-                  </li>
-                  <!-- /.timeline-label -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-camera bg-purple"></i>
-
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
-                      <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                      <div class="timeline-body">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                      </div>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
+                            <h3 class="timeline-header"><?= $dados->accao;?> <?= $dados->tipo;?></h3>
+                          </div>
+                        </li>
+                        <?php } 
+                      ?>
+                  <?php 
+                  }
+                }
+                  ?>
+                  
                   <li>
                     <i class="fa fa-clock-o bg-gray"></i>
                   </li>
@@ -183,3 +134,84 @@
 
     </section>
     <!-- /.content -->
+
+
+    <div class="modal fade" id="updateFoto">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Upload Fotografia</h4>
+          </div>
+          <div class="modal-body">
+            <form action="<?= base_url('admin/do_upload');?>" method="POST" class="form-horizontal" enctype="multipart/form-data">
+            <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
+            <div class="form-group">
+                <div class="col-sm-5" ><img src="<?= base_url('assets/uploads/'.$_SESSION['profil-img']);?>" alt="" class="img-responsive" id="showIMG"></div>
+
+                <div class="col-sm-7">
+                  <input type="file" name="userfile" id="userfile"  onchange="readURL(this);">
+                </div>
+              </div>
+              
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+            <button type="submit" name="submit" class="btn btn-success">Guardar</button>
+            </form>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="updatePass">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center">Atualizar Palavra-passe</h4>
+          </div>
+          <div class="modal-body">
+            <form action="<?= base_url('admin/do_upload');?>" method="POST" class="form-horizontal">
+            <div class="form-group">
+              <label for="old-password" name="password" class="col-sm-4 control-label">Antiga Palavra-passe </label>
+
+              <div class="col-sm-8">
+                <input type="password" class="form-control" name="old-password" id="old-password" placeholder="Antiga palavra-passe">
+              </div>
+              
+            </div>
+            <div class="form-group">
+              <label for="password" name="password" class="col-sm-4 control-label">Palavra-passe </label>
+
+              <div class="col-sm-8">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Nova palavra-passe">
+              </div>
+              
+            </div>
+            <div class="form-group">
+              <label for="password-repeat" name="password-repeat" class="col-sm-4 control-label">Confirmar palavra-passe </label>
+
+              <div class="col-sm-8">
+                <input type="password" class="form-control" name="password-repeat" id="password-repeat" placeholder="Repetir nova palavra-passe">
+              </div>
+              
+            </div>
+              
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+            <button type="submit" name="submit" class="btn btn-success">Guardar</button>
+            </form>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
