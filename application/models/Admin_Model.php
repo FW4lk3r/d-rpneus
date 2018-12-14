@@ -7,6 +7,26 @@ class Admin_Model extends CI_Model {
 
     }
 
+    public function getDadosPerfil(){
+        $result = $this->db->get('utilizadores');
+        return $result->result();
+    }
+
+    public function getPathFotoPerfil($id){
+        $this->db->select('path_image');
+        $this->db->where('id', $_SESSION['id']);
+        $result = $this->db->get('utilizadores');
+        return $result->result();
+    }
+
+    public function UpdateProfilImg($name_img, $id){
+        $this->db->set('path_image', $name_img);
+        $this->db->where('id', $id);
+        $this->db->update('utilizadores');
+        $this->inserirAccao('Atualizar', 'Fotográfia de perfil', $id);
+        return true;
+    }
+
     public function getDados(){
         $result = $this->db->get('dados_website');
         return $result->result();
@@ -172,7 +192,28 @@ class Admin_Model extends CI_Model {
         return $this->db->count_all($tipe);
     }
 
-    
+    public function getAccaoPorDia($id){
+        $this->db->select('created_at');
+        $this->db->limit(5,0);
+        $this->db->where('id_user',$id);
+        $this->db->group_by('year(created_at),month(created_at),day(created_at)');
+        $this->db->order_by('id', 'DESC');
+        $result = $this->db->get('accao');
+        return $result->result();
+    }
+
+    public function getAccao($id,$day){
+
+        $createDate = new DateTime($day);
+        $strip = $createDate->format('Y-m-d');
+        $this->db->where('id_user', $id);
+        $this->db->like('created_at', $strip);
+        $this->db->limit(5,0);
+        $this->db->order_by('id', 'DESC');
+       
+        $result = $this->db->get('accao');
+        return $result->result();
+    }
 
     
 }
