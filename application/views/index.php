@@ -80,7 +80,7 @@
         <div class="row second_line">
             <?php foreach ($pneus as $row)
             { ?>
-                <div class="col-md-3 margin-0">
+                <div class="col-xs-6 col-md-4 col-lg-3 padding-0" style="margin-bottom:15px;">
                     <figure class="pneus">
                         <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
                         <figcaption>
