@@ -90,12 +90,14 @@ if(current_url() == base_url('admin/pneus')){?>
     var diametro = button.data('diametro') 
     var marca = button.data('marca') 
     var foto = button.data('foto')
+    var tipo = button.data('tipo')
     var modal = $(this)
     modal.find('.modal-title').text('Pneu nº: [' + id + ']')
     modal.find('#id').val(id)
     modal.find('#inputName').val(nome)
     modal.find('#inputPreco').val(preco)
     modal.find('#largura option').removeAttr('selected').filter('[value=' + largura + ']').attr('selected', true);
+    modal.find('#tipo option').removeAttr('selected').filter('[value=' + tipo + ']').attr('selected', true);
     modal.find('#altura option').removeAttr('selected').filter('[value=' + altura + ']').attr('selected', true);
     modal.find('#diametro option').removeAttr('selected').filter('[value=' + diametro + ']').attr('selected', true);
     modal.find('#marca option').removeAttr('selected').filter('[value=' + marca + ']').attr('selected', true);

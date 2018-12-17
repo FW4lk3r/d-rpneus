@@ -26,7 +26,7 @@
                                             Precisa de ajuda?
                                         </div>
                                         <div class="n_tel">
-                                            9*********
+                                          <?= $definicoes[0]->telemovel?>
                                         </div>
                                 </div>
                             </div>

@@ -2,7 +2,7 @@
         <div class="container principal">
             <div class="row">
                 <div class="col-md-6 content-search">
-                    <h2 class="nome_empresa">D&R Pneus</h2>
+                    <h2 class="nome_empresa"><?= $definicoes[0]->nome_empresa?></h2>
 
                     <form action="#" class="formulario">
                         <div class="form-group">
@@ -296,9 +296,8 @@
             <div class="row contact_conteudo">
                     <div class="col-md-6 coluna2" id="colunax">
                         <h2 class="nome_contactos">Contactos</h2>
-                        <p class="tel_morada">Telefone:</p>
-                        <p class="tel_morada">Morada:</p>
-                        <p class="desc_contactos">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros ut erat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.</p>
+                        <p class="tel_morada">Morada: <?= $definicoes[0]->morada?></p>
+                        <p class="desc_contactos"><?= $definicoes[0]->desc_contactos?></p>
                         <form action="#">
                             <div class="form-group">
                                     <input type="text" class="form-control" id="name" placeholder="Nome">

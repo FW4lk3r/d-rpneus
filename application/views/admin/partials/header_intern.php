@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/bootstrap-daterangepicker/daterangepicker.css'); ?>">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>">
-
+  <link rel="icon" type="image/png" href="<?= base_url('assets/img/favicon.ico');?>" sizes="32x32">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -126,12 +126,12 @@
         <li><a href="<?= base_url('admin/diametro');?>"><i class="fa fa-circle"></i><span>Diametro</span></a></li>
         <li><a href="<?= base_url('admin/altura');?>"><i class="fa fa-arrows-alt"></i> <span>Altura</span></a></li>
         <li><a href="<?= base_url('admin/definicoes');?>"><i class="fa fa-cog"></i> <span>Dados website</span></a></li>
-        
+        <?php if($_SESSION['cargo']  == 3){?>
         <li class="header">Administração</li>
-        <li><a href="<?= base_url('admin/profil');?>"><i class="fa fa-users"></i> <span>Membros</span></a></li>
-        <li><a href="<?= base_url('admin/profil');?>"><i class="fa fa-exclamation-circle"></i> <span>Avisos</span></a></li>
-        <li><a href="<?= base_url('admin/profil');?>"><i class="fa fa-book"></i> <span>Documentação</span></a></li>
-        <li><a href="<?php echo base_url('admin/website');?>"><i class="fa fa-circle-o text-aqua"></i> <span>Dados website admin</span></a></li>
+        <li><a href=""><i class="fa fa-users"></i> <span>Membros</span></a></li>
+        <li><a href=""><i class="fa fa-exclamation-circle"></i> <span>Avisos</span></a></li>
+        <li><a href=""><i class="fa fa-book"></i> <span>Logs</span></a></li>
+        <?php }?>
       </ul>
     </section>
     <!-- /.sidebar -->

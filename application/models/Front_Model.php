@@ -31,6 +31,11 @@ class Front_Model extends CI_Model {
         return $result->result();
     }
 
+    public function getDefinicoes(){
+        $result = $this->db->get('definicoes');
+        return $result->result();
+    }
+
 
     public function getLargura(){
         $this->db->order_by('largura','ASC');
