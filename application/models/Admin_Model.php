@@ -105,6 +105,7 @@ class Admin_Model extends CI_Model {
             'altura' => $dados['altura'],
             'diametro' => $dados['diametro'],
             'foto_pneu' => $dados['foto_pneu'],
+            'tipo' => $dados['tipo'],
             'id_marca' => $dados['marca']
         );
     
@@ -122,6 +123,7 @@ class Admin_Model extends CI_Model {
             'altura' => $dados['altura'],
             'diametro' => $dados['diametro'],
             'foto_pneu' => $dados['foto_pneu'],
+            'tipo' => $dados['tipo'],
             'id_marca' => $dados['marca']
         );
         $this->db->replace('pneus', $data);
@@ -154,6 +156,25 @@ class Admin_Model extends CI_Model {
         $this->inserirAccao('Atualizar', 'largura', $sessao);
         return true;
     }
+
+    public function updateDefinicoes($dados, $sessao){
+        $data = array(
+            'id_def' => 1,
+            'fixo'  => $dados['fixo'],
+            'telemovel'  => $dados['telemovel'],
+            'email'  => $dados['email'],
+            'facebook'  => $dados['facebook'],
+            'texto'  => $dados['texto'],
+            'nome_empresa'  => $dados['nome_empresa'],
+            'desc_contactos'  => $dados['desc_contactos'],
+            'morada'  => $dados['morada']
+        );
+        $this->db->replace('definicoes', $data);
+        $this->inserirAccao('Atualizar', 'definições', $sessao);
+        return true;
+    }
+
+    
 
     public function getAltura(){
         $this->db->order_by('altura','ASC');
@@ -243,7 +264,8 @@ class Admin_Model extends CI_Model {
     }
 
     public function getDefinicoes(){
-        return true;
+        $result = $this->db->get('definicoes');
+        return $result->result();
     }
 
     public function UpdatePassword($id, $new){

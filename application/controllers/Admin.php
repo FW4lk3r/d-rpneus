@@ -356,6 +356,7 @@ class Admin extends CI_Controller {
 			$dados['largura']  = $this->input->post('largura');
 			$dados['altura']  = $this->input->post('altura');
 			$dados['marca']  = $this->input->post('marca');
+			$dados['tipo']  = $this->input->post('tipo');
 			
 			$config['upload_path']          = 'assets/uploads/';
 			$config['allowed_types']        = 'jpeg|jpg|png';
@@ -394,6 +395,7 @@ class Admin extends CI_Controller {
 			$dados['largura']  = $this->input->post('largura');
 			$dados['altura']  = $this->input->post('altura');
 			$dados['marca']  = $this->input->post('marca');
+			$dados['tipo']  = $this->input->post('tipo');
 
 			$config['upload_path']          = 'assets/uploads/';
 			$config['allowed_types']        = 'jpeg|jpg|png';
@@ -530,6 +532,26 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function updateDefinicoes(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$dados['fixo'] = htmlspecialchars($this->input->post('telefoneFixo'));
+			$dados['telemovel'] = htmlspecialchars($this->input->post('telemovel'));
+			$dados['email'] = htmlspecialchars($this->input->post('email'));
+			$dados['facebook'] = htmlspecialchars($this->input->post('facebook'));
+			$dados['texto'] = htmlspecialchars($this->input->post('texto'));
+			$dados['nome_empresa'] = htmlspecialchars($this->input->post('empresa'));
+			$dados['desc_contactos'] = htmlspecialchars($this->input->post('desc_contactos'));
+			$dados['morada'] = htmlspecialchars($this->input->post('morada'));
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->updateDefinicoes($dados, $_SESSION['id']);
+
+			redirect('admin/definicoes');
+		}
+	}
+
+	
 	/*
 		Created: 10/12/2018
 		Delete largura
