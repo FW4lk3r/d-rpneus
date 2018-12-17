@@ -58,6 +58,44 @@ class Admin extends CI_Controller {
 
 	/* 
 		Created: 3/12/2018
+		Definições
+	*/
+	public function definicoes(){
+		$this->verify_login();
+
+		$this->load->model('Admin_Model');
+		$dados['definicoes'] = $this->Admin_Model->getDefinicoes();
+		$this->load->view('admin/partials/header_intern.php');
+        $this->load->view('admin/definicoes.php', $dados);
+        $this->load->view('admin/partials/footer_intern.php');
+	}
+
+	/* 
+		Created: 3/12/2018
+		Activate Pneu
+	*/
+	public function AtivarPneu($id_pneu){
+		$this->verify_login();
+		$this->db->set('ativo', 1);
+		$this->db->where('id_pneu', $id_pneu);
+        $this->db->update('pneus');
+		redirect('admin/pneus');
+	}
+
+	/* 
+		Created: 3/12/2018
+		Desactivate Pneu
+	*/
+	public function DesativarPneu($id_pneu){
+		$this->verify_login();
+		$this->db->set('ativo', 0);
+		$this->db->where('id_pneu', $id_pneu);
+        $this->db->update('pneus');
+		redirect('admin/pneus');
+	}
+
+	/* 
+		Created: 3/12/2018
 		Load the login page
 	*/
 	public function login($indice = NULL){
@@ -247,15 +285,41 @@ class Admin extends CI_Controller {
 		
 		$dados['accaoDia'] = $this->Admin_Model->getAccaoPorDia($_SESSION['id']);
 		foreach($dados['accaoDia'] as $row){
-			$row->accao = $this->Admin_Model->getAccao($_SESSION['id'],$row->created_at);
+			$row->accao = $this->Admin_Model->getAccao($_SESSION['id'], $row->created_at);
 		}
 
-		$dados['perfil'] = $this->Admin_Model->getDadosPerfil();
-		
-
+		$dados['perfil'] = $this->Admin_Model->getDadosPerfil($_SESSION['id']);
+		$dados['inseridos'] = $this->Admin_Model->getCountAll($_SESSION['id']);
 		$this->load->view('admin/partials/header_intern.php');
 		$this->load->view('admin/profil', $dados);
 		$this->load->view('admin/partials/footer_intern.php');
+	}
+
+	/*
+		Created: 10/12/2018
+		Edit password
+	*/
+	public function EditPassword(){
+		$this->verify_login();
+
+		$oldPassword = sha1($this->input->post('old-password'));
+		$newPassword = sha1($this->input->post('password'));
+		$repeatPassword = sha1($this->input->post('password-repeat'));
+
+		//verifiy if the password are the same
+		if($newPassword == $repeatPassword){
+			//verifiy if the oldest password are ok
+			$this->load->model('Admin_Model');
+
+			if($this->Admin_Model->checkPassword($_SESSION['id'],$oldPassword)){
+				//update database
+				$this->Admin_Model->UpdatePassword($_SESSION['id'], $newPassword);
+				//redirect the user
+				redirect('admin/profil');
+			} else {
+				$this->load->view('error_password');
+			}
+		}
 	}
 	
 	/*
@@ -293,7 +357,21 @@ class Admin extends CI_Controller {
 			$dados['altura']  = $this->input->post('altura');
 			$dados['marca']  = $this->input->post('marca');
 			
-			
+			$config['upload_path']          = 'assets/uploads/';
+			$config['allowed_types']        = 'jpeg|jpg|png';
+			$config['max_size']             = 100000;
+			$config['max_width']            = 3000;
+			$config['max_height']           = 2000;
+
+			$this->load->library('upload', $config);
+			if($this->upload->do_upload('userfile')){
+				
+				$data = $this->upload->data();
+				$dados['foto_pneu'] = $data['file_name'];
+			} else {
+				$dados['foto_pneu'] = 'icon-no-image.svg';
+			}
+
 			$this->load->model('Admin_Model');
 		
 			$this->Admin_Model->insertPneu($dados, $_SESSION['id']);
@@ -316,8 +394,38 @@ class Admin extends CI_Controller {
 			$dados['largura']  = $this->input->post('largura');
 			$dados['altura']  = $this->input->post('altura');
 			$dados['marca']  = $this->input->post('marca');
+
+			$config['upload_path']          = 'assets/uploads/';
+			$config['allowed_types']        = 'jpeg|jpg|png';
+			$config['max_size']             = 100000;
+			$config['max_width']            = 3000;
+			$config['max_height']           = 2000;
+
+			$this->load->library('upload', $config);
 			$this->load->model('Admin_Model');
+			$this->db->select('foto_pneu');
+			$this->db->where('id_pneu', $id);
+			$img = $this->db->get('pneus');
+			$img_final = $img->result();
+			
+			
+			if($this->upload->do_upload('userfile')){
+				
+				$data = $this->upload->data();
+				$dados['foto_pneu'] = $data['file_name'];
+			} else {
+				
+				$dados['foto_pneu'] = $img_final[0]->foto_pneu;
+			}
+			$teste = $this->upload->data();
+			if($teste['file_name'] == ""){
+				
+			} else{
+				if($img_final[0]->foto_pneu !== 'icon-no-image.svg')
+					unlink('assets/uploads/'.$img_final[0]->foto_pneu); 
+			}
 		
+
 			$this->Admin_Model->updatePneus($id, $dados, $_SESSION['id']);
 
 			redirect('admin/pneus');
@@ -330,7 +438,12 @@ class Admin extends CI_Controller {
 	*/
 	public function deletePneu($id){
 		$this->verify_login();
-
+		$this->load->model('Admin_Model');
+		$imagem = $this->Admin_Model->getPathFotoPneu($id);
+			
+		//fazer o delete da antiga foto
+		if($imagem[0]->foto_pneu !== 'icon-no-image.svg')
+			unlink('assets/uploads/'.$imagem[0]->foto_pneu); 
 		$this->db->where('id_pneu', $id);
 		$this->db->delete('pneus');
 

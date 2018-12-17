@@ -7,8 +7,17 @@ class Admin_Model extends CI_Model {
 
     }
 
-    public function getDadosPerfil(){
+    public function getDadosPerfil($id){
+        $this->db->where('id', $id);
         $result = $this->db->get('utilizadores');
+        return $result->result();
+    }
+
+
+    public function getPathFotoPneu($id){
+        $this->db->select('foto_pneu');
+        $this->db->where('id_pneu', $id);
+        $result = $this->db->get('pneus');
         return $result->result();
     }
 
@@ -17,6 +26,23 @@ class Admin_Model extends CI_Model {
         $this->db->where('id', $_SESSION['id']);
         $result = $this->db->get('utilizadores');
         return $result->result();
+    }
+
+    public function getCountAll($id){
+        $valor = 0;
+        $pneus = $this->db->query('SELECT * FROM pneus');
+        $valor += $pneus->num_rows();
+        $largura = $this->db->query('SELECT * FROM largura');
+        $valor += $largura->num_rows();
+        $altura = $this->db->query('SELECT * FROM altura');
+        $valor += $altura->num_rows();
+        $diametro = $this->db->query('SELECT * FROM diametro');
+        $valor += $diametro->num_rows();
+        $marcas = $this->db->query('SELECT * FROM marcas');
+        $valor += $marcas->num_rows();
+        //$jantes = $this->db->query('SELECT * FROM jantes');
+        //$valor += $jantes->num_rows();
+        return $valor;
     }
 
     public function UpdateProfilImg($name_img, $id){
@@ -70,6 +96,7 @@ class Admin_Model extends CI_Model {
     }
 
     public function insertPneu($dados, $sessao){
+       
         
         $data = array(
             'nome_pneu' => $dados['nome_pneu'],
@@ -77,6 +104,7 @@ class Admin_Model extends CI_Model {
             'largura' => $dados['largura'],
             'altura' => $dados['altura'],
             'diametro' => $dados['diametro'],
+            'foto_pneu' => $dados['foto_pneu'],
             'id_marca' => $dados['marca']
         );
     
@@ -93,6 +121,7 @@ class Admin_Model extends CI_Model {
             'largura' => $dados['largura'],
             'altura' => $dados['altura'],
             'diametro' => $dados['diametro'],
+            'foto_pneu' => $dados['foto_pneu'],
             'id_marca' => $dados['marca']
         );
         $this->db->replace('pneus', $data);
@@ -200,6 +229,29 @@ class Admin_Model extends CI_Model {
         $this->db->order_by('id', 'DESC');
         $result = $this->db->get('accao');
         return $result->result();
+    }
+
+    public function checkPassword($id,$old){
+        $this->db->select('password');
+        $this->db->where('password', $old);
+        $this->db->where('id', $id);
+        $result = $this->db->get('utilizadores');
+        if($result->num_rows() > 0){
+            return true;
+        } 
+        return false;
+    }
+
+    public function getDefinicoes(){
+        return true;
+    }
+
+    public function UpdatePassword($id, $new){
+        $this->db->set('password', $new);
+        $this->db->where('id', $id);
+        $this->db->update('utilizadores');
+        $this->inserirAccao('Atualizar', 'Palavra-passe', $id);
+        return true;
     }
 
     public function getAccao($id,$day){
