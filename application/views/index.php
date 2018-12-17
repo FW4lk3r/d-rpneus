@@ -82,7 +82,7 @@
             { ?>
                 <div class="col-xs-6 col-md-4 col-lg-3 padding-0" style="margin-bottom:15px;">
                     <figure class="pneus">
-                        <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
+                        <img src="<?= base_url('assets/uploads/'. $row->foto_pneu);?>" alt="pneu"/>
                         <figcaption>
                             <h2>Características</h2>
                             <div class="row" >
@@ -140,12 +140,12 @@
   <section id="empresa">
     <div class="container" id="CPneus">   
         <div class="row">
-                <div class="col-md-12">
-                    <h2 class="nome_jantes">Jantes</h2>
-                </div>
-                <div class="col-md-12 linha2"></div>
-                <!--<div class="col-md-12 desc_pneus">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>-->
+            <div class="col-md-12">
+                <h2 class="nome_jantes">Jantes</h2>
             </div>
+            <div class="col-md-12 linha2"></div>
+            <!--<div class="col-md-12 desc_pneus">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>-->
+        </div>
         
         <div class="row second_line">
             <div class="col-md-3 margin-0">
@@ -205,19 +205,19 @@
             </div>
             
             
-    </div>
+        </div>
    
-    <div class="row second_line">
-        <div class="col-md-3 padding-0">
-            <figure class="pneus">
-                <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
-                <figcaption>
-                    <h2>Características<p>Pneu</p></h2>
-                    <p>Largura:</p>
-                    <p>Altura:</p>
-                    <p>Diâmetro:</p>
-                </figcaption>           
-            </figure>
+        <div class="row second_line">
+            <div class="col-md-3 padding-0">
+                <figure class="pneus">
+                    <img src="<?= base_url('assets/img/pneusNovos.jpg');?>" alt="pneu"/>
+                    <figcaption>
+                        <h2>Características<p>Pneu</p></h2>
+                        <p>Largura:</p>
+                        <p>Altura:</p>
+                        <p>Diâmetro:</p>
+                    </figcaption>           
+                </figure>
                 <div class="texto">
                         <p class="titulo">Marca</p>
                         <p class="subtitulo">Nome do Pneu</p>
@@ -286,35 +286,35 @@
             </div>
         </div>
         
-        
-        
-</div>
-</div>
+            
+            
+    </div>
+
   </section>
   <section id="contactos">
         <div class="container" id="CServicos">
-                <div class="row contact_conteudo">
-                        <div class="col-md-6 coluna2" id="colunax">
-                            <h2 class="nome_contactos">Contactos</h2>
-                            <p class="tel_morada">Telefone:</p>
-                            <p class="tel_morada">Morada:</p>
-                            <p class="desc_contactos">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros ut erat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.</p>
-                            <form action="#">
-                                <div class="form-group">
-                                        <input type="text" class="form-control" id="name" placeholder="Nome">
-                                </div>
-                                <div class="form-group">
-                                        <input type="email" class="form-control" id="mail" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                        <textarea type="text" class="form-control" id="message" placeholder="Mensagem"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-default botao_contact">Enviar</button>
-                              </form>
-                        </div>
-                        <div class="col-md-6" id="coluna2">
-                            
-                        </div>
+            <div class="row contact_conteudo">
+                    <div class="col-md-6 coluna2" id="colunax">
+                        <h2 class="nome_contactos">Contactos</h2>
+                        <p class="tel_morada">Telefone:</p>
+                        <p class="tel_morada">Morada:</p>
+                        <p class="desc_contactos">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros ut erat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.</p>
+                        <form action="#">
+                            <div class="form-group">
+                                    <input type="text" class="form-control" id="name" placeholder="Nome">
+                            </div>
+                            <div class="form-group">
+                                    <input type="email" class="form-control" id="mail" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                    <textarea type="text" class="form-control" id="message" placeholder="Mensagem"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-default botao_contact">Enviar</button>
+                            </form>
                     </div>
+                    <div class="col-md-6" id="">
+                    <div style="width: 100%"><iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/map-my-route/">Draw map route</a></iframe></div><br />
+                    </div>
+                </div>
         </div>
   </section>
