@@ -25,6 +25,8 @@ class Front_Model extends CI_Model {
         $this->db->join('altura', 'pneus.altura = altura.id_altura');
         $this->db->join('diametro', 'pneus.diametro = diametro.id_diametro');
         $this->db->join('largura', 'pneus.largura = largura.id_largura');
+        $this->db->where('ativo',1);
+        $this->db->limit(8,0);
         $result =  $this->db->get();
         return $result->result();
     }
