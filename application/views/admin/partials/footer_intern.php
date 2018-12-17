@@ -71,7 +71,7 @@ if(current_url() == base_url('admin/pneus')){?>
       "columnDefs": [ {
             "searchable": false,
             "orderable": false,
-            "targets": [7]
+            "targets": [1,8]
       } ],
       "language": {
         "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese.json"
@@ -89,6 +89,7 @@ if(current_url() == base_url('admin/pneus')){?>
     var altura = button.data('altura')
     var diametro = button.data('diametro') 
     var marca = button.data('marca') 
+    var foto = button.data('foto')
     var modal = $(this)
     modal.find('.modal-title').text('Pneu nº: [' + id + ']')
     modal.find('#id').val(id)
@@ -98,6 +99,8 @@ if(current_url() == base_url('admin/pneus')){?>
     modal.find('#altura option').removeAttr('selected').filter('[value=' + altura + ']').attr('selected', true);
     modal.find('#diametro option').removeAttr('selected').filter('[value=' + diametro + ']').attr('selected', true);
     modal.find('#marca option').removeAttr('selected').filter('[value=' + marca + ']').attr('selected', true);
+    modal.find('#showIMG').attr("src","http://localhost:8888/pneus/assets/uploads/"+ foto);
+ 
   })
   
 </script>
@@ -252,7 +255,7 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#showIMG')
+            $('.showIMG')
                 .attr('src', e.target.result)
                 .width('100%');
         };

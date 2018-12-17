@@ -34,7 +34,7 @@
                   <button class="btn btn-info" data-toggle="modal" data-target="#updatePass" >Mudar</button></a>
                 </li>
                 <li class="list-group-item">
-                  <b>Dados inseridos</b> <a class="pull-right">xxxx</a>
+                  <b>Dados inseridos</b> <a class="pull-right"><?= $inseridos ?></a>
                 </li>
               </ul>
 
@@ -49,7 +49,6 @@
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#timeline" data-toggle="tab">Últimos passos</a></li>
-              <li><a href="#settings" data-toggle="tab">Definições</a></li>
             </ul>
             <div class="tab-content">
             
@@ -99,30 +98,7 @@
               </div>
               <!-- /.tab-pane -->
 
-              <div class="tab-pane" id="settings">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Nome</label>
-
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" value="" placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label" value="">Email</label>
-
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-success">Validar</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- /.tab-pane -->
+            
             </div>
             <!-- /.tab-content -->
           </div>
@@ -148,7 +124,7 @@
             <form action="<?= base_url('admin/do_upload');?>" method="POST" class="form-horizontal" enctype="multipart/form-data">
             <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
             <div class="form-group">
-                <div class="col-sm-5" ><img src="<?= base_url('assets/uploads/'.$_SESSION['profil-img']);?>" alt="" class="img-responsive" id="showIMG"></div>
+                <div class="col-sm-5" ><img src="<?= base_url('assets/uploads/'.$_SESSION['profil-img']);?>" alt="" class="showIMG img-responsive" id="showIMG"></div>
 
                 <div class="col-sm-7">
                   <input type="file" name="userfile" id="userfile"  onchange="readURL(this);">
@@ -177,7 +153,7 @@
             <h4 class="modal-title text-center">Atualizar Palavra-passe</h4>
           </div>
           <div class="modal-body">
-            <form action="<?= base_url('admin/do_upload');?>" method="POST" class="form-horizontal">
+            <form action="<?= base_url('admin/EditPassword');?>" method="POST" class="form-horizontal">
             <div class="form-group">
               <label for="old-password" name="password" class="col-sm-4 control-label">Antiga Palavra-passe </label>
 
