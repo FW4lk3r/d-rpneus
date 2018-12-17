@@ -235,6 +235,7 @@ figure.pneus:hover figcaption::before {
 }
 
 /***********************************************************************/
+
 .padding-0{
     padding-left: 0%;
     padding-right: 0%;
@@ -308,13 +309,11 @@ figure.pneus:hover figcaption::before {
     background-image: url("../img/tracks3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100vh;
 }
 
 #CServicos{
     background:rgb(169,169,169);
     width: 100%;
-    height: 82vh;
 }
 #coluna2{
     padding: 0;
@@ -415,13 +414,40 @@ h1 {
     font-size: 15px;
 }
 footer{
-    position: absolute;
-    right: 0;
-    left: 0;
-    padding: 1rem;
-    background-color: black;
+    background: #58595B;
+    color: rgba(255,255,255,0.6);
+}
+
+footer .main-footer{
+    padding: 40px 0;
+}
+
+.main-footer .container, .credits .container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.fa-fw {
+    width: 1.28571429em;
     text-align: center;
-    color: grey;
+}
+
+.fa {
+    display: inline-block;
+   
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+footer .credits{
+    background: #444;
+    color: #999;
+    font-size: 13px;
+    padding: 15px 0;
 }
 
 /*.col_footer{
