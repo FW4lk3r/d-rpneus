@@ -17,7 +17,7 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Fotográfia</th>
+                  <th>Fotografia</th>
                   <th>Nome</th>
                   <th>Preço</th>
                   <th>Largura</th>
@@ -43,7 +43,9 @@
                             <td style=" vertical-align: middle!important;"><?= $row->altura?></td>
                             <td style=" vertical-align: middle!important;"><?= $row->diametro?></td>
                             <td style=" vertical-align: middle!important;"><?= $row->marca?></td>
-                            <td>XXX</td>
+                            <td style=" vertical-align: middle!important;"><?php
+                              if($row->tipo == 1) echo 'Carro'; elseif($row->tipo == 2) echo 'Moto'; else echo 'Indefinido';
+                            ?></td>
                             <td style=" vertical-align: middle!important;"><?php 
                                   if($row->ativo == 0){ ?>
                                     <a href="AtivarPneu/<?= $row->id_pneu ?>">
@@ -67,6 +69,7 @@
                                 data-diametro="<?= htmlspecialchars($row->id_diametro)?>"
                                 data-marca="<?= htmlspecialchars($row->id_marca)?>"
                                 data-foto="<?= htmlspecialchars($row->foto_pneu)?>"
+                                data-tipo="<?=  htmlspecialchars($row->tipo)?>"
                                 >Editar</button> <a href="deletePneu/<?= $row->id_pneu ?>">
                                 <button class="btn btn-danger">Apagar</button></a>
                             </td>
@@ -113,6 +116,16 @@
                           <input type="text" class="form-control" name="preco" id="inputName" placeholder="Preço (0.00)">
                         </div>
                       </div>
+                      <div class="form-group">
+                        <label for="inputName" name="pneu" class="col-sm-2 control-label">Tipo </label>
+    
+                        <div class="col-sm-10">
+                            <select class="form-control select2" name="tipo" style="width: 100%;">
+                              <option value="1">Carro</option>
+                              <option value="2">Moto</option>
+                            </select>
+                        </div>
+                      </div>  
                       <div class="form-group">
                         <label for="inputName" name="pneu" class="col-sm-2 control-label">Largura </label>
     
@@ -207,6 +220,17 @@
                       <input type="text" class="form-control" name="preco" id="inputPreco" placeholder="Preço (0.00)">
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label for="inputName" name="pneu" class="col-sm-2 control-label">Largura </label>
+
+                    <div class="col-sm-10">
+                        <select class="form-control select2" name="tipo" id="tipo" style="width: 100%;"> 
+                          <option value="0">Indefinido</option> 
+                          <option value="1">Carro</option> 
+                          <option value="2">Moto</option>    
+                        </select>
+                    </div>
+                  </div>  
                   <div class="form-group">
                     <label for="inputName" name="pneu" class="col-sm-2 control-label">Largura </label>
 
