@@ -49,7 +49,7 @@ class Admin extends CI_Controller {
 		$this->load->model('Admin_Model');
 		$dados['marcas'] = $this->Admin_Model->getCount('marcas');
 		$dados['pneus'] = $this->Admin_Model->getCount('pneus');
-		//$dados['jantes'] = $this->Admin_Model->getCountJantes();
+		$dados['jantes'] = $this->Admin_Model->getCount('jantes');
 		
         $this->load->view('admin/partials/header_intern.php');
         $this->load->view('admin/index.php', $dados);
@@ -82,6 +82,14 @@ class Admin extends CI_Controller {
 		redirect('admin/pneus');
 	}
 
+	public function AtivarJante($id_jante){
+		$this->verify_login();
+		$this->db->set('ativo', 1);
+		$this->db->where('id_jante', $id_jante);
+        $this->db->update('jantes');
+		redirect('admin/jantes');
+	}
+
 	/* 
 		Created: 3/12/2018
 		Desactivate Pneu
@@ -92,6 +100,14 @@ class Admin extends CI_Controller {
 		$this->db->where('id_pneu', $id_pneu);
         $this->db->update('pneus');
 		redirect('admin/pneus');
+	}
+
+	public function DesativarJante($id_jante){
+		$this->verify_login();
+		$this->db->set('ativo', 0);
+		$this->db->where('id_jante', $id_jante);
+        $this->db->update('jantes');
+		redirect('admin/jantes');
 	}
 
 	/* 
@@ -452,6 +468,142 @@ class Admin extends CI_Controller {
 		redirect('admin/pneus');
 	}
 
+	/******************** Jantes */
+
+	/*
+		Created: 10/12/2018
+		See pneus
+	*/
+	public function jantes(){
+		$this->verify_login();
+		$this->load->model('Admin_Model');
+
+		$data['jantes'] = $this->Admin_Model->getJantes();
+		$data['marca_veiculo'] = $this->Admin_Model->getMarcaVeiculo();
+		$data['diametro'] = $this->Admin_Model->getDiametro();
+
+		$this->load->view('admin/partials/header_intern.php');
+		$this->load->view('admin/jantes', $data);
+		$this->load->view('admin/partials/footer_intern.php');
+	}
+
+	/*
+		Created: 10/12/2018
+		Create pneu
+	*/
+	public function criarJante(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$dados['nome_jante'] = $this->input->post('nome_jante');
+			$dados['preco']  = $this->input->post('preco');
+			$dados['diametro']  = $this->input->post('diametro');
+			$dados['marca_veiculo']  = $this->input->post('marcaVeiculo');
+			$dados['tipo']  = $this->input->post('tipo');
+			
+			$config['upload_path']          = 'assets/uploads/';
+			$config['allowed_types']        = 'jpeg|jpg|png';
+			$config['max_size']             = 100000;
+			$config['max_width']            = 3000;
+			$config['max_height']           = 2000;
+
+			$this->load->library('upload', $config);
+			if($this->upload->do_upload('userfile')){
+				
+				$data = $this->upload->data();
+				$dados['foto_jante'] = $data['file_name'];
+			} else {
+				$dados['foto_jante'] = 'icon-no-image.svg';
+			}
+
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->insertJante($dados, $_SESSION['id']);
+
+			redirect('admin/jantes');
+		}
+	}
+
+	/*
+		Created: 10/12/2018
+		Update pneu
+	*/
+	public function updateJante(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$id = $this->input->post('id');
+			$dados['nome_pneu'] = $this->input->post('nome_pneu');
+			$dados['preco']  = $this->input->post('preco');
+			$dados['diametro']  = $this->input->post('diametro');
+			$dados['largura']  = $this->input->post('largura');
+			$dados['altura']  = $this->input->post('altura');
+			$dados['marca']  = $this->input->post('marca');
+			$dados['tipo']  = $this->input->post('tipo');
+
+			$config['upload_path']          = 'assets/uploads/';
+			$config['allowed_types']        = 'jpeg|jpg|png';
+			$config['max_size']             = 100000;
+			$config['max_width']            = 3000;
+			$config['max_height']           = 2000;
+
+			$this->load->library('upload', $config);
+			$this->load->model('Admin_Model');
+			$this->db->select('foto_pneu');
+			$this->db->where('id_pneu', $id);
+			$img = $this->db->get('pneus');
+			$img_final = $img->result();
+			
+			
+			if($this->upload->do_upload('userfile')){
+				
+				$data = $this->upload->data();
+				$dados['foto_pneu'] = $data['file_name'];
+			} else {
+				
+				$dados['foto_pneu'] = $img_final[0]->foto_pneu;
+			}
+			$teste = $this->upload->data();
+			if($teste['file_name'] == ""){
+				
+			} else{
+				if($img_final[0]->foto_pneu !== 'icon-no-image.svg')
+					unlink('assets/uploads/'.$img_final[0]->foto_pneu); 
+			}
+		
+
+			$this->Admin_Model->updatePneus($id, $dados, $_SESSION['id']);
+
+			redirect('admin/pneus');
+		}
+	}
+
+	public function marcaVeiculo(){
+		$this->verify_login();
+		$this->load->model('Admin_Model');
+		
+		$data['marcaVeiculo'] = $this->Admin_Model->getMarcaVeiculo();
+		$this->load->view('admin/partials/header_intern.php');
+		$this->load->view('admin/marcaVeiculo', $data);
+		$this->load->view('admin/partials/footer_intern.php');
+	}
+
+	/*
+		Created: 11/12/2018
+		Delete largura
+	*/
+	public function deleteJante($id){
+		$this->verify_login();
+		$this->load->model('Admin_Model');
+		$imagem = $this->Admin_Model->getPathFotoJante($id);
+			
+		//fazer o delete da antiga foto
+		if($imagem[0]->foto_jante !== 'icon-no-image.svg')
+			unlink('assets/uploads/'.$imagem[0]->foto_jante); 
+		$this->db->where('id_jante', $id);
+		$this->db->delete('jantes');
+
+		redirect('admin/jantes');
+	}
+
 	
 	/*
 		Created: 10/12/2018
@@ -481,6 +633,19 @@ class Admin extends CI_Controller {
 			$this->Admin_Model->insertMarca($marca, $_SESSION['id']);
 
 			redirect('admin/marcas');
+		}
+	}
+
+	public function criarMarcaVeiculo(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$marcaVeiculo = $this->input->post('marcaVeiculo');
+			
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->insertMarcaVeiculo($marcaVeiculo, $_SESSION['id']);
+
+			redirect('admin/marcaVeiculo');
 		}
 	}
 
@@ -687,6 +852,15 @@ class Admin extends CI_Controller {
 		redirect('admin/diametro');
 	}
 
+	public function deleteMarcaVeiculo($id){
+		$this->verify_login();
+
+		$this->db->where('id_marca_veiculo', $id);
+		$this->db->delete('marcas-veiculo');
+
+		redirect('admin/marcaVeiculo');
+	}
+
 	/*
 		Created: 10/12/2018
 		Update brand
@@ -701,6 +875,18 @@ class Admin extends CI_Controller {
 			$this->Admin_Model->updateMarca($id, $marca, $_SESSION['id']);
 
 			redirect('admin/marcas');
+		}
+	}
+	public function updateMarcaVeiculo(){
+		$this->verify_login();
+		if($this->input->post('submit') !== null){
+			$id = $this->input->post('id');
+			$marcaVeiculo = htmlspecialchars($this->input->post('marcaVeiculo'));
+			$this->load->model('Admin_Model');
+		
+			$this->Admin_Model->updateMarcaVeiculo($id, $marcaVeiculo, $_SESSION['id']);
+
+			redirect('admin/marcaVeiculo');
 		}
 	}
 

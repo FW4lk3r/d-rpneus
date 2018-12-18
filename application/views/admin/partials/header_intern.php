@@ -118,14 +118,18 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU PRINCIPAL</li>
+        <li><a href="<?= base_url('admin/');?>"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
         <li><a href="<?= base_url('admin/profil');?>"><i class="fa fa-user"></i> <span>Meu perfil</span></a></li>
-        <li><a href="<?= base_url('admin/pneus');?>"><i class="fa fa-road"></i> <span>Pneus</span></a></li>
-        <li><a href="<?= base_url('admin/jantes');?>"><i class="fa fa-road"></i> <span>Jantes</span></a></li>
-        <li><a href="<?= base_url('admin/marcas');?>"><i class="fa fa-bandcamp"></i> <span>Marcas</span></a></li>
-        <li><a href="<?= base_url('admin/largura');?>"><i class="fa fa-arrows-alt"></i> <span>largura</span></a></li>
-        <li><a href="<?= base_url('admin/diametro');?>"><i class="fa fa-circle"></i><span>Diametro</span></a></li>
-        <li><a href="<?= base_url('admin/altura');?>"><i class="fa fa-arrows-alt"></i> <span>Altura</span></a></li>
         <li><a href="<?= base_url('admin/definicoes');?>"><i class="fa fa-cog"></i> <span>Dados website</span></a></li>
+        <li><a href="<?= base_url('admin/diametro');?>"><i class="fa fa-circle"></i><span>Diametro</span></a></li>
+        <li class="header">PNEUS</li>
+        <li><a href="<?= base_url('admin/pneus');?>"><i class="fa fa-road"></i> <span>Pneus</span></a></li>
+        <li><a href="<?= base_url('admin/marcas');?>"><i class="fa fa-bandcamp"></i> <span>Marcas Pneus</span></a></li>
+        <li><a href="<?= base_url('admin/largura');?>"><i class="fa fa-arrows-alt"></i> <span>largura</span></a></li>
+        <li><a href="<?= base_url('admin/altura');?>"><i class="fa fa-arrows-alt"></i> <span>Altura</span></a></li>
+        <li class="header">JANTES</li>
+        <li><a href="<?= base_url('admin/jantes');?>"><i class="fa fa-road"></i> <span>Jantes</span></a></li>
+        <li><a href="<?= base_url('admin/marcaVeiculo');?>"><i class="fa fa-bandcamp"></i> <span>Marca Veiculos</span></a></li>
         <?php if($_SESSION['cargo']  == 3){?>
         <li class="header">Administração</li>
         <li><a href=""><i class="fa fa-users"></i> <span>Membros</span></a></li>

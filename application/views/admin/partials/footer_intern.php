@@ -108,6 +108,53 @@ if(current_url() == base_url('admin/pneus')){?>
 </script>
 <?php } ?>
 <?php 
+if(current_url() == base_url('admin/jantes')){?>
+  <script>
+  $(function () {
+    $('#jantes').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : false,
+      'autoWidth'   : false,
+      "pageLength"  : 6,
+      "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": [1,8]
+      } ],
+      "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese.json"
+      }
+    })
+   
+  })
+
+  $('#updateJante').on('show.bs.modal',function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var nome = button.data('nome')
+    var preco = button.data('preco')
+    var diametro = button.data('diametro') 
+    var marca = button.data('marca') 
+    var foto = button.data('foto')
+    var tipo = button.data('tipo')
+    var modal = $(this)
+    modal.find('.modal-title').text('Jante nº: [' + id + ']')
+    modal.find('#id').val(id)
+    modal.find('#inputName').val(nome)
+    modal.find('#inputPreco').val(preco)
+    modal.find('#tipo option').removeAttr('selected').filter('[value=' + tipo + ']').attr('selected', true);
+    modal.find('#diametro option').removeAttr('selected').filter('[value=' + diametro + ']').attr('selected', true);
+    modal.find('#marca option').removeAttr('selected').filter('[value=' + marca + ']').attr('selected', true);
+    modal.find('#showIMG').attr("src","http://localhost:8888/pneus/assets/uploads/"+ foto);
+ 
+  })
+  
+</script>
+<?php } ?>
+<?php 
 if(current_url() == base_url('admin/marcas')){?>
   <script>
   $(function () {
@@ -139,6 +186,42 @@ if(current_url() == base_url('admin/marcas')){?>
     modal.find('.modal-title').text('Marca nº: [' + id + ']')
     modal.find('#id').val(id)
     modal.find('#marcainput').val(nome)
+  })
+  
+</script>
+<?php } ?>
+<?php 
+if(current_url() == base_url('admin/marcaVeiculo')){?>
+  <script>
+  $(function () {
+    $('#marca-veiculo').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : false,
+      'autoWidth'   : false,
+      "pageLength"  : 6,
+      "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": [2,3]
+      } ],
+      "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese.json"
+      }
+    })
+   
+  })
+
+  $('#updateMarcaVeiculo').on('show.bs.modal',function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var nome = button.data('nome') 
+    var modal = $(this)
+    modal.find('.modal-title').text('Marca veiculo nº: [' + id + ']')
+    modal.find('#id').val(id)
+    modal.find('#marcaVeiculo').val(nome)
   })
   
 </script>

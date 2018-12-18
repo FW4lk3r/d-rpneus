@@ -38,7 +38,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>xx</h3>
+              <h3><?= $jantes ?></h3>
 
               <p>Total jantes</p>
             </div>

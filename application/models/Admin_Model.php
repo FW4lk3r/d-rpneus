@@ -21,6 +21,13 @@ class Admin_Model extends CI_Model {
         return $result->result();
     }
 
+    public function getPathFotoJante($id){
+        $this->db->select('foto_jante');
+        $this->db->where('id_jante', $id);
+        $result = $this->db->get('jantes');
+        return $result->result();
+    }
+
     public function getPathFotoPerfil($id){
         $this->db->select('path_image');
         $this->db->where('id', $_SESSION['id']);
@@ -40,8 +47,8 @@ class Admin_Model extends CI_Model {
         $valor += $diametro->num_rows();
         $marcas = $this->db->query('SELECT * FROM marcas');
         $valor += $marcas->num_rows();
-        //$jantes = $this->db->query('SELECT * FROM jantes');
-        //$valor += $jantes->num_rows();
+        $jantes = $this->db->query('SELECT * FROM jantes');
+        $valor += $jantes->num_rows();
         return $valor;
     }
 
@@ -67,6 +74,15 @@ class Admin_Model extends CI_Model {
         $this->inserirAccao('Inserir', 'marca', $sessao);
         return true;
     }
+    public function insertMarcaVeiculo($marcaVeiculo, $sessao){
+        $data = array(
+            'marca_veiculo' => $marcaVeiculo
+        );
+    
+        $this->db->insert('marcas-veiculo',$data);
+        $this->inserirAccao('Inserir', 'marca veiculo', $sessao);
+        return true;
+    }
 
     public function updateMarca($id, $marca, $sessao){
         $data = array(
@@ -78,9 +94,46 @@ class Admin_Model extends CI_Model {
         return true;
     }
 
+    public function updateMarcaVeiculo($id, $marcaVeiculo, $sessao){
+        $data = array(
+            'id_marca_veiculo' => $id,
+            'marca_veiculo'  => $marcaVeiculo
+        );
+        $this->db->replace('marcas-veiculo', $data);
+        $this->inserirAccao('Atualizar', 'marca veiculo', $sessao);
+        return true;
+    }
+
     public function getMarcas(){
         $this->db->order_by('marca','ASC');
         $result = $this->db->get('marcas');
+        return $result->result();
+    }
+
+    public function getMarcaVeiculo(){
+        $this->db->order_by('marca_veiculo','ASC');
+        $result = $this->db->get('marcas-veiculo');
+        return $result->result();
+    }
+
+    public function getDiametroJante(){
+        $this->db->order_by('diametro_jante','ASC');
+        $result = $this->db->get('diametro-jante');
+        return $result->result();
+    }
+
+    public function getModeloVeiculo(){
+        $this->db->order_by('modelo_veiculo','ASC');
+        $result = $this->db->get('modelo-veiculo');
+        return $result->result();
+    }
+
+    public function getJantes(){
+        $this->db->select('*');    
+        $this->db->from('jantes');
+        $this->db->join('marcas-veiculo', 'jantes.id_marca_veiculo = marcas-veiculo.id_marca_veiculo');
+        $this->db->join('diametro', 'jantes.diametro = diametro.id_diametro');
+        $result =  $this->db->get();
         return $result->result();
     }
 
@@ -111,6 +164,23 @@ class Admin_Model extends CI_Model {
     
         $this->db->insert('pneus',$data);
         $this->inserirAccao('Inserir', 'pneus', $sessao);
+        return true;
+    }
+    
+    public function insertJante($dados, $sessao){
+       
+        
+        $data = array(
+            'nome_jante' => $dados['nome_jante'],
+            'preco' => $dados['preco'],
+            'diametro' => $dados['diametro'],
+            'foto_jante' => $dados['foto_jante'],
+            'tipo' => $dados['tipo'],
+            'id_marca_veiculo' => $dados['marca_veiculo']
+        );
+    
+        $this->db->insert('jantes',$data);
+        $this->inserirAccao('Inserir', 'jante', $sessao);
         return true;
     }
 
