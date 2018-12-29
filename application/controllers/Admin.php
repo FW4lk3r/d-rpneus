@@ -700,14 +700,39 @@ class Admin extends CI_Controller {
 	public function updateDefinicoes(){
 		$this->verify_login();
 		if($this->input->post('submit') !== null){
-			$dados['fixo'] = htmlspecialchars($this->input->post('telefoneFixo'));
-			$dados['telemovel'] = htmlspecialchars($this->input->post('telemovel'));
+			$dados['altura'] = htmlspecialchars($this->input->post('altura'));
+			$dados['apoio_cliente'] = htmlspecialchars($this->input->post('apoio_cliente'));
+			$dados['carro'] = htmlspecialchars($this->input->post('carro'));
+			$dados['cod_postal'] = htmlspecialchars($this->input->post('cod_postal'));
+			$dados['contacto'] = htmlspecialchars($this->input->post('contacto'));
+			$dados['desc_contacto'] = htmlspecialchars($this->input->post('desc_contacto'));
+			$dados['diametro'] = htmlspecialchars($this->input->post('diametro'));
 			$dados['email'] = htmlspecialchars($this->input->post('email'));
+			$dados['enviar'] = htmlspecialchars($this->input->post('enviar'));
 			$dados['facebook'] = htmlspecialchars($this->input->post('facebook'));
+			$dados['jante'] = htmlspecialchars($this->input->post('jante'));
+			$dados['largura'] = htmlspecialchars($this->input->post('largura'));
+			$dados['marca'] = htmlspecialchars($this->input->post('marca'));
+			$dados['moto'] = htmlspecialchars($this->input->post('moto'));
+			$dados['nossa_localizacao'] = htmlspecialchars($this->input->post('nossa_localizacao'));
+			$dados['nosso_servicos'] = htmlspecialchars($this->input->post('nosso_servicos'));
+			$dados['pagina_inicial'] = htmlspecialchars($this->input->post('pagina_inicial'));
+			$dados['pesquisar'] = htmlspecialchars($this->input->post('pesquisar'));
+			$dados['pneu'] = htmlspecialchars($this->input->post('pneu'));
+			$dados['pneu_carro'] = htmlspecialchars($this->input->post('pneu_carro'));
+			$dados['pneu_moto'] = htmlspecialchars($this->input->post('pneu_moto'));
+			$dados['precisa_ajuda'] = htmlspecialchars($this->input->post('precisa_ajuda'));
+			$dados['servico'] = htmlspecialchars($this->input->post('servico'));
+			$dados['servico_1'] = htmlspecialchars($this->input->post('servico_1'));
+			$dados['servico_2'] = htmlspecialchars($this->input->post('servico_2'));
+			$dados['servico_3'] = htmlspecialchars($this->input->post('servico_3'));
+			$dados['servico_4'] = htmlspecialchars($this->input->post('servico_4'));
+			$dados['servico_5'] = htmlspecialchars($this->input->post('servico_5'));
+			$dados['telemovel'] = htmlspecialchars($this->input->post('telemovel'));
 			$dados['texto'] = htmlspecialchars($this->input->post('texto'));
-			$dados['nome_empresa'] = htmlspecialchars($this->input->post('empresa'));
-			$dados['desc_contactos'] = htmlspecialchars($this->input->post('desc_contactos'));
-			$dados['morada'] = htmlspecialchars($this->input->post('morada'));
+			$dados['titulo'] = htmlspecialchars($this->input->post('titulo'));
+			$dados['titulo_contacto'] = htmlspecialchars($this->input->post('titulo_contacto'));
+			
 			$this->load->model('Admin_Model');
 		
 			$this->Admin_Model->updateDefinicoes($dados, $_SESSION['id']);
