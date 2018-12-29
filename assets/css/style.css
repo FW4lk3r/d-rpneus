@@ -1,19 +1,10 @@
-@font-face {
-    font-family: Florence;
-    src: url(Florence-Regular.ttf);
-}
 
 
 /*****PÁGINA INICAIL******/
 section{
     opacity: 1;
 }
-#paginainicial {
-    background-image: url("1152.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-}
+
 .menu {
     font-family: 'Raleway', Arial, sans-serif;
     text-align: center;
