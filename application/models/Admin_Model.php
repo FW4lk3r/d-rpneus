@@ -228,18 +228,12 @@ class Admin_Model extends CI_Model {
     }
 
     public function updateDefinicoes($dados, $sessao){
-        $data = array(
-            'id_def' => 1,
-            'fixo'  => $dados['fixo'],
-            'telemovel'  => $dados['telemovel'],
-            'email'  => $dados['email'],
-            'facebook'  => $dados['facebook'],
-            'texto'  => $dados['texto'],
-            'nome_empresa'  => $dados['nome_empresa'],
-            'desc_contactos'  => $dados['desc_contactos'],
-            'morada'  => $dados['morada']
-        );
-        $this->db->replace('definicoes', $data);
+    
+        foreach($dados as $key => $value){
+            $this->db->set('valor', $value);
+            $this->db->where('slug', $key);
+            $this->db->update('definicoes');
+        }
         $this->inserirAccao('Atualizar', 'definições', $sessao);
         return true;
     }
