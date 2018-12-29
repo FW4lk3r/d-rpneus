@@ -18,6 +18,12 @@ class Front_Model extends CI_Model {
         return $result->result();
     }
 
+    public function getMarcasVeiculo(){
+        $this->db->order_by('id_marca_veiculo','ASC');
+        $result = $this->db->get('marcas-veiculo');
+        return $result->result();
+    }
+
     public function getPneus(){
         $this->db->select('*');    
         $this->db->from('pneus');
@@ -31,9 +37,27 @@ class Front_Model extends CI_Model {
         return $result->result();
     }
 
+    public function getJantes(){
+        $this->db->select('*');    
+        $this->db->from('jantes');
+        $this->db->join('marcas-veiculo', 'jantes.id_marca_veiculo = marcas-veiculo.id_marca_veiculo');
+        $this->db->join('diametro', 'jantes.diametro = diametro.id_diametro');
+        $this->db->where('ativo',1);
+        $this->db->limit(8,0);
+        $result =  $this->db->get();
+        return $result->result();
+    }
+
     public function getDefinicoes(){
         $result = $this->db->get('definicoes');
-        return $result->result();
+        $array = array();
+
+        foreach($result->result() as $row)
+        {
+            $array[$row->slug] = $row->valor; // add each user id to the array
+
+        }
+        return $array;
     }
 
 
