@@ -5,33 +5,40 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style-frontend.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css3-animate-it-master/css/animations.css');?>" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <link rel="icon" type="image/png" href="<?= base_url('assets/img/favicon.ico');?>" sizes="32x32">
-        <META charset="utf-8">
-        <title> D&R PNEUS </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>  <?= htmlspecialchars($definicoes['titulo']);  ?> </title>
         </head>
 <body>
-
-  <section id="paginainicial">
-        <header>
-                <div class="container before_nav">
-                            <div class="row">
-                                <div class="col-md-4">
-                                        <a href="<?= base_url()?>"><img src="<?= base_url('assets/img/logo.png');?>" alt="logo" class="logo"/></a>
+  <div class="grey">
+    <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                       <a href="<?= base_url();?>"><img src="<?= base_url('assets/img/logo.png');?>" alt="logo" class="logo"/></a> 
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 icon pull-right">
+                            <div class="right">
+                                <span class="glyphicon glyphicon-earphone telefone"></span>
+                                <div class="ajuda">
+                                <div class="help">
+                                  <?= htmlspecialchars($definicoes['precisa_ajuda']);  ?>
                                 </div>
-                                <div class="col-md-4 icon">
-                                                <span class="glyphicon glyphicon-earphone telefone"></span>
-                                    </div>
-                                 <div class="col-md-4 ajuda">
-                                        <div class="help">
-                                            Precisa de ajuda?
-                                        </div>
-                                        <div class="n_tel">
-                                          <?= $definicoes[0]->telemovel?>
-                                        </div>
+                                <div class="n_tel">
+                                    <?= htmlspecialchars($definicoes['telemovel']);  ?>
                                 </div>
-                            </div>
+                                </div>
+                                </div>
                     </div>
-                    <nav class="navbar navbar-inverse navbar-fixed-top">
+                  
+            </div>
+    </div>
+
+  </div>
+                    <nav class="navbar fixed-top navbar-inverse navigation sticky-top">
                             <div class="container-fluid">
                               <div class="navbar-header">
                                 <!--<a class="navbar-brand" href="#">D&R PNEUS</a>-->
@@ -45,8 +52,8 @@
                 
                               <div class="collapse navbar-collapse navHeaderCollapse" id="centro">
                               <ul class="nav navbar-nav menu">
-                                <li class="active"><a href="#paginainicial">Página Inicial</a></li>
-                                <li><a href="#servicos">Serviços</a></li>
+                                <li class="current" id="changePaginaInicial"><a href="#paginainicial" onclick="changePaginaInicial();"><?= htmlspecialchars($definicoes['pagina_inicial']);  ?></a></li>
+                                <li id="changeServicos"><a href="#servicos" onclick="changeServicos();" class="scroll"><?= htmlspecialchars($definicoes['servico']);  ?></a></li>
                                 <!--<li role="presentation" class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                           Pneus <span class="caret"></span>
@@ -56,12 +63,11 @@
                                           <li>Pneus Motos</li>
                                         </ul>
                                       </li>-->
-                                <li><a href="#pneus" class="palavra">Pneus</a></li>
-                                <li><a href="#empresa" class="palavra">Jantes</a></li>
-                                <li><a href="#contactos">Contactos</a></li>
+                                <li id="changePneus"><a href="#pneus" class="palavra scroll" onclick="changePneus();"><?= htmlspecialchars($definicoes['pneu']);  ?></a></li>
+                                <li id="changeEmpresa"><a href="#empresa" class="palavra scroll" onclick="changeEmpresa();"><?= htmlspecialchars($definicoes['jante']);  ?></a></li>
+                                <li id="changeContactos"><a href="#contactos" onclick="changeContactos();" class="scroll"><?= htmlspecialchars($definicoes['contacto']);  ?></a></li>
                               </ul>
                               </div>
                             </div>
                           </nav>
-            
-            </header>
+
