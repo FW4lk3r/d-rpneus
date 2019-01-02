@@ -16,7 +16,7 @@
             </ul>
             <div class="tab-content panel-body">
                 <div role="tabpanel" class="tab-pane active" id="carro">
-                <form action="/action_page.php" class="formulario">
+                <form action="<?= base_url('descricao/pneu');?>" method="POST" class="formulario">
                     <div class="row titulos">
                         <div class="col-sm-4"><label for="exampleSelect1"><?= htmlspecialchars($definicoes['largura']);  ?></label></div>
                         <div class="col-sm-3"><label for="exampleSelect1"><?= htmlspecialchars($definicoes['altura']);  ?></label></div>
@@ -27,7 +27,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                     
-                                    <select class="form-control" id="exampleSelect1">
+                                    <select class="form-control" name="largura" id="exampleSelect1">
                                     <?php foreach($largura as $row){ ?>
                                         <option value="<?= $row->id_largura?>"><?= $row->largura ?></option>
                                     <?php } ?>
@@ -38,7 +38,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 
-                                    <select class="form-control" id="exampleSelect1">
+                                    <select class="form-control" name="altura" id="exampleSelect1">
                                     <?php foreach($altura as $row){ ?>
                                         <option value="<?= $row->id_altura?>"><?= $row->altura ?></option>
                                     <?php } ?>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <select class="form-control" id="exampleSelect1">
+                                <select class="form-control" name="diametro" id="exampleSelect1">
                                 <?php foreach($diametro as $row){ ?>
                                     <option value="<?= $row->id_diametro?>"><?= $row->diametro ?></option>
                                     <?php } ?>
@@ -66,7 +66,7 @@
                     </form>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="moto">
-                <form action="/action_page.php" class="formulario">
+                <form action="<?= base_url('descricao/get_pneu/'.htmlspecialchars($definicoes['largura']). '/'. htmlspecialchars($definicoes['altura']) .'/'. htmlspecialchars($definicoes['diametro']));?>" method="GET" class="formulario">
                     <div class="row titulos">
                         <div class="col-sm-4"><label for="exampleSelect1"><?= htmlspecialchars($definicoes['largura']);  ?></label></div>
                         <div class="col-sm-3"><label for="exampleSelect1"><?= htmlspecialchars($definicoes['altura']);  ?></label></div>
@@ -116,7 +116,7 @@
                     </form>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="jante">
-                <form action="/action_page.php" class="formulario">
+                <form action="<?= base_url('descricao/get_jante');?>" method="GET" class="formulario">
                     <div class="row titulos">
                         <div class="col-sm-4"><label for="exampleSelect1"><?= htmlspecialchars($definicoes['marca']);  ?></label></div>
                         <div class="col-sm-4"><label for="exampleSelect1"><?= htmlspecialchars($definicoes['diametro']);  ?></label></div>
@@ -203,7 +203,8 @@
         <div class="row">
             <?php foreach($pneus as $row){ ?>
             <div class="col-xs-12 col-sm-6 col-md-3 margin-bottom-10">
-                <div class="contents-data">
+                <a href="<?= base_url('descricao/pneu/'.$row->id_pneu);?>" class="thumbnail" style="padding: 0 0 5px 0; text-decoration: none;">
+                <div class="">
                     <!--<strong class="preco"> <?= $row->preco ?> €</strong> -->
                     <div class="retangulo"><?= $row->preco ?> CHF</div>
                     <figure class="pneus"  id="imagemPneus">
@@ -215,9 +216,10 @@
                         </figcaption>           
                     </figure>
                 
-                    <p class="titulo"><?= $row->marca ?></p>
-                    <p class="subtitulo"><?= $row->nome_pneu ?></p>
+                    <p class="titulo" style="color: initial"><?= $row->marca ?></p>
+                    <p class="subtitulo" style="color: initial"><?= $row->nome_pneu ?></p>
                 </div>
+                </a>
             </div>
             <?php } ?>        
         </div>
@@ -273,15 +275,15 @@
                     <h4 class="text-uppercase nome_contactos text-center "><?= htmlspecialchars($definicoes['titulo_contacto']);  ?></h4>
 
                     <p class="desc_contactos"><?= htmlspecialchars($definicoes['desc_contacto']);  ?></p>
-                    <form action="#">
+                    <form action="<?= base_url('Home/enviar_email')?>" method="post">
                         <div class="form-group">
-                                <input type="text" class="form-control" id="name" placeholder="Nom">
+                                <input type="text" name="nome" class="form-control" id="name" placeholder="Nom">
                         </div>
                         <div class="form-group">
-                                <input type="email" class="form-control" id="mail" placeholder="E-mail">
+                                <input type="email" name="email" class="form-control" id="mail" placeholder="E-mail">
                         </div>
                         <div class="form-group">
-                                <textarea type="text" rows="6" class="form-control" id="message" placeholder="Message"></textarea>
+                                <textarea type="text" name="message" rows="6" class="form-control" id="message" placeholder="Message"></textarea>
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-default botao_contact"><?= htmlspecialchars($definicoes['enviar']);  ?></button>
