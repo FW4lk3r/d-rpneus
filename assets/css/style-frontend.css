@@ -47,7 +47,7 @@ footer a {
 }
 
 footer a:hover {
-    color: white;
+    color: #DF0101;
     text-decoration: none;
 }
 
@@ -699,10 +699,9 @@ h1 {
 .text_desc{
     text-align: center;
     text-transform: uppercase;
-    
     color: black;
     font-size:25px;
-    margin-bottom: 3%;
+    padding: 3% 0;
 }
 .description{
    /* background-color:white; */
@@ -712,8 +711,9 @@ padding-top: 2%;
 
 }
 .pneu_img{
-    height: 27vh;
-    width: 27vh;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
 }
 .pneu_img2{
     height: 10vh;
@@ -729,45 +729,28 @@ padding-top: 2%;
     width: fit-content;
     float: left;
 }
-.detalhes{
-    display: inline-block;
-   width: fit-content;
-   margin-left: 8%;
-   max-width: 68%;;
 
-}
 .col_images{
     margin-top: 2%;
 }
 .row_text{
     text-align: center;
-    margin-top: 3%;
+    margin: 3% 0;
 
 }
 #home1{
     background-color:White;
     padding-top:3%;
-    height: 40vh;
-    margin-bottom: 5%;
-    width: fit-content;
-
-
 }
+
 .home_text{
-margin-left: 5%;
-margin-right: 5%;
+    text-align: justify;
 }
-#home{
-padding-top:3%;
-height: 40vh;
-background-color: white;
-margin-bottom: 5%;
-padding-left: 5%; 
-padding-right: 5%; 
-width: fit-content;
 
-   
-    
+#home{
+    padding-top:3%;
+    height: 40vh;
+    background-color: white;
 }
 
 .table-wrapper-scroll-y {
@@ -775,20 +758,17 @@ width: fit-content;
     max-height: 40vh;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    }
+}
 
 
 .ative a{
     background-color: white !important;
     color: black !important;
     border: none !important;
-   
-   
 }
 
 
 .menus{
-  /* max-width: 33%;*/
     margin: 0%;
     background-color: transparent ; 
     width: fit-content;
@@ -796,38 +776,42 @@ width: fit-content;
     border: none;
     padding: 0%;
 }
+
 #a_pneus{
     text-align: center;
     border: 1px solid grey;
-   
 }
+
 #a_pneus2{
     border: 1px solid grey;
     border-left: none;
 }
+
 .letter {
     display: inline-block;  
     color: yellow;
 }
+
 .calendar-text {  color:white; }
+
 .gaspump{
     color:#ffbf00;
 }
+
 .square{
     color:white;
     font-size: 9px;
-    
 }
+
 th, td{
     text-align: center;
 }
-.table{
-    width: fit-content;
-}
+
 .table_head{
     background-color: grey;
     color:#ffea00;
 }
+
 .bookmark{
     color:green;
 }
@@ -1147,3 +1131,18 @@ th, td{
        margin-top: 0px;
    }
 }
+
+
+.bookmark-A { color: #008828 !important}
+.bookmark-B { color: #019026 !important}
+.bookmark-C { color: #adc900 !important}
+.bookmark-D { color: #fde900 !important}
+.bookmark-E { color: #fba105 !important}
+.bookmark-F { color: #e84d0d !important}
+.bookmark-G { color: #e42512 !important}
+
+.spacing-10{ margin-top: 10px !important}
+.spacing-20{ margin-top: 20px !important}
+.spacing-30{ margin-top: 30px !important}
+.spacing-40{ margin-top: 40px !important}
+.spacing-50{ margin-top: 50px !important}
