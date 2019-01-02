@@ -401,6 +401,25 @@ class Admin extends CI_Controller {
 		Created: 10/12/2018
 		Update pneu
 	*/
+	public function editarPneu($id = null){
+		$this->verify_login();
+		$this->load->model('Admin_Model');
+		
+		$data['pneu'] = $this->Admin_Model->dadosPneu($id);
+		$data['altura'] = $this->Admin_Model->getAltura();
+		$data['largura'] = $this->Admin_Model->getLargura();
+		$data['diametro'] = $this->Admin_Model->getDiametro();
+		$data['marcas'] = $this->Admin_Model->getMarcas();
+		
+		$this->load->view('admin/partials/header_intern.php');
+		$this->load->view('admin/editarPneu', $data);
+		$this->load->view('admin/partials/footer_intern.php');
+	}
+
+	/*
+		Created: 10/12/2018
+		Update pneu
+	*/
 	public function updatePneus(){
 		$this->verify_login();
 		if($this->input->post('submit') !== null){
@@ -411,6 +430,12 @@ class Admin extends CI_Controller {
 			$dados['largura']  = $this->input->post('largura');
 			$dados['altura']  = $this->input->post('altura');
 			$dados['marca']  = $this->input->post('marca');
+			$dados['indice']  = $this->input->post('indice');
+			$dados['descricao']  = $this->input->post('descricao');
+			$dados['aderencia']  = $this->input->post('aderencia');
+			$dados['ruido']  = $this->input->post('ruido');
+			$dados['raio']  = $this->input->post('raio');
+			$dados['consumo']  = $this->input->post('consumo');
 			$dados['tipo']  = $this->input->post('tipo');
 
 			$config['upload_path']          = 'assets/uploads/';
@@ -444,9 +469,8 @@ class Admin extends CI_Controller {
 			}
 		
 
-			$this->Admin_Model->updatePneus($id, $dados, $_SESSION['id']);
-
-			redirect('admin/pneus');
+			if($this->Admin_Model->updatePneus($id, $dados, $_SESSION['id']))
+				redirect('admin/editarPneu/'.$id);
 		}
 	}
 
@@ -603,6 +627,8 @@ class Admin extends CI_Controller {
 
 		redirect('admin/jantes');
 	}
+
+	
 
 	
 	/*
