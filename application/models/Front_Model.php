@@ -37,6 +37,17 @@ class Front_Model extends CI_Model {
         return $result->result();
     }
 
+    public function getDadosMenu(){
+        $result = $this->db->query('SELECT DISTINCT pneus.largura, pneus.altura, pneus.diametro, pneus.id_marca FROM pneus 
+        INNER JOIN marcas ON pneus.id_marca = marcas.id_marca
+        INNER JOIN altura ON pneus.altura = altura.id_altura
+        INNER JOIN diametro ON pneus.diametro = diametro.id_diametro
+        INNER JOIN largura ON pneus.largura = largura.id_largura
+        WHERE ativo = 1');
+        return $result->result();
+
+    }
+
     public function getJantes(){
         $this->db->select('*');    
         $this->db->from('jantes');

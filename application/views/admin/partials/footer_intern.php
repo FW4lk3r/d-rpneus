@@ -56,9 +56,11 @@
 <script src="<?php echo base_url('assets/dist/js/pages/dashboard.js');?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url('assets/dist/js/demo.js');?>"></script>
+
 <?php 
 if(current_url() == base_url('admin/pneus')){?>
   <script>
+  
   $(function () {
     $('#pneus').DataTable({
       'paging'      : true,
@@ -104,6 +106,8 @@ if(current_url() == base_url('admin/pneus')){?>
     modal.find('#showIMG').attr("src","http://localhost:8888/pneus/assets/uploads/"+ foto);
  
   })
+
+  
   
 </script>
 <?php } ?>

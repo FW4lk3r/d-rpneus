@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-5 col-sm-6 col-md-8">
-                    ©2018. <?= htmlspecialchars($definicoes['titulo']);  ?>.
+                    ©2018. <?= $definicoes['titulo'];  ?>.
                 </div>
                 <div class="col-xs-7 col-sm-6 col-md-4">
                     <div class="poweredby pull-right">
