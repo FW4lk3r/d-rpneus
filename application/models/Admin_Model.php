@@ -148,6 +148,18 @@ class Admin_Model extends CI_Model {
         return $result->result();
     }
 
+    public function dadosPneu($id) {
+        $this->db->select('*');    
+        $this->db->from('pneus');
+        $this->db->join('marcas', 'pneus.id_marca = marcas.id_marca');
+        $this->db->join('altura', 'pneus.altura = altura.id_altura');
+        $this->db->join('diametro', 'pneus.diametro = diametro.id_diametro');
+        $this->db->join('largura', 'pneus.largura = largura.id_largura');
+        $this->db->where('id_pneu', $id);
+        $result =  $this->db->get();
+        return $result->result();
+    }
+
     public function insertPneu($dados, $sessao){
        
         
@@ -194,7 +206,13 @@ class Admin_Model extends CI_Model {
             'diametro' => $dados['diametro'],
             'foto_pneu' => $dados['foto_pneu'],
             'tipo' => $dados['tipo'],
-            'id_marca' => $dados['marca']
+            'id_marca' => $dados['marca'],
+            'indice' => $dados['indice'],
+            'aderencia' => $dados['aderencia'],
+            'raio' => $dados['raio'],
+            'descricao' => $dados['descricao'],
+            'consumo' => $dados['consumo'],
+            'ruido' => $dados['ruido'],
         );
         $this->db->replace('pneus', $data);
         $this->inserirAccao('Atualizar', 'pneus', $sessao);

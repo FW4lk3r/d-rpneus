@@ -1,405 +1,105 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <META charset="utf-8">
-        <title> D&R PNEUS </title>
-        </head>
-<body clas="animatedParent">
-<section id="descricao" class="animated bounceInDown">
-<header>
-                <div class="container before_nav">
-                            <div class="row">
-                                <div class="col-md-4">
-                                        <img src="logo.png" alt="logo" class="logo"/>
-                                </div>
-                                <div class="all_information">
-                                <div class="col-md-4 icon">
-                                        <span class="glyphicon glyphicon-earphone telefone"></span>
-                                    </div>
-                                 <div class="col-md-4 ajuda">
-                                        <div class="help">
-                                            Precisa de ajuda?
-                                        </div>
-                                        <div class="n_tel">
-                                            9*********
-                                        </div>
-                                </div>
-                                </div>
-                            </div>
-                    </div>
-                    <nav class="navbar navbar-inverse navbar-fixed-top">
-                            <div class="container-fluid">
-                              <div class="navbar-header">
-                                <!--<a class="navbar-brand" href="#">D&R PNEUS</a>-->
-                                <button class ="navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                   </button>
-                              </div>
-                             
-                
-                              <div class="collapse navbar-collapse navHeaderCollapse" id="centro">
-                              <ul class="nav navbar-nav menu">
-                                <li class="active"><a href="#paginainicial">Página Inicial</a></li>
-                                <li><a href="#servicos">Serviços</a></li>
-                                <!--<li role="presentation" class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                          Pneus <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                          <li>Pneus Carros</li>
-                                          <li>Pneus Motos</li>
-                                        </ul>
-                                      </li>-->
-                                <li><a href="#pneus" class="palavra">Pneus</a></li>
-                                <li><a href="#empresa" class="palavra">Jantes</a></li>
-                                <li><a href="#contactos">Contactos</a></li>
-                              </ul>
-                              </div>
-                            </div>
-                          </nav>
-            
-            </header>
-        <div class="container description">
-         <div class="row">
-                    <div class="col-md-12 text_desc">
-                    Descrição do Pneu
-                    </div>
-                </div>
-            <div class="container desc_imagens">
+
+      
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text_desc">
+            <?= $info_pneu[0]->nome_pneu ?> | <?= $info_pneu[0]->altura?>/<?= $info_pneu[0]->largura?> R<?= $info_pneu[0]->raio?> <?= $info_pneu[0]->indice?> T
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-3">
                
-                <div class="row row_conteudo">
-                    <div class="col-md-12">
-                        <img src="2353.jpg" alt="pneu" class="pneu_img"/>
-                        
-                        
-                    </div>
-                    </div>
-                <div class="row">
-                    <div class="col-md-12 col_images">
-                    <img src="pneus.jpg" alt="pneu" class="pneu_img2"/>
-                        <img src="pneus.jpg" alt="pneu" class="pneu_img2"/>
-                        <img src="pneus.jpg" alt="pneu" class="pneu_img2"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 row_text">
-                        Marca
-                        <p>Nome do Pneu </p>
-                    </div>
-                </div>
-                    
-            </div>
-            <div class= "container detalhes">
-                <div class="row">
-                    <div class="col-md-12 ">
-                    <nav class="navbar navbar-default menus">
-                    <div class="container-fluid">
-                        <ul class="nav navbar-nav">
-                        <li id ="ativo" class="active ative"><a href="#" onclick="changeDivBack();" id="a_pneus">Descrição</a></li>
-                        <li id ="ativo2"><a href="#" onclick="changeDiv();" id="a_pneus2">Disponiveis</a></li>
-                        </ul>
-                    </div>
-                    </nav>
-                    </div>
-                </div>
-                <div id="home1">
-                     <div class="home_text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                    </div>
-                </div>
-                <div id="home" style="display:none;" class="table-wrapper-scroll-y">
-                    <table class="table table-striped">
-                        <thead class="table_head">
-                            <tr>
-                            <th scope="col">Dimensões</th>
-                            <th scope="col">Performace</th>
-                            <th scope="col">Detalhe de livração</th>
-                            <th scope="col"></th>
-                            <th scope="col">Preço</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            
-                            <td>155/70 R13 75 T</td>
-                            <td>
-                                 <span class="fa-stack"  data-toggle="tooltip" data-placement="bottom" title="Consumo de Comustível">
-                                     <i class="fas fa-gas-pump gaspump fa-stack-2x"></i>
-                                </span>
-                               
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-                                
-                                 <span class="fa-stack" data-toggle="tooltip" data-placement="bottom" title="Aderência à chuva">
-                                     <i class="fas fa-cloud-rain gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-
-                                 <span class="fa-stack" data-toggle="tooltip" data-placement="bottom" title="ruído externo em decibéis">
-                                     <i class="fas fa-volume-up  gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <strong class="fa-stack-1x square">71dB</strong>
-                                </span>
-
-                            </td>
-                            <td>2 a 4 dias úteis</td>
-                            <td>Em stock</td>
-                            <td>15€</td>
-                            </tr>
-                            <tr>
-                            <td>155/70 R13 75 T</td>
-                            <td>
-                                 <span class="fa-stack">
-                                     <i class="fas fa-gas-pump gaspump fa-stack-2x"></i>
-                                </span>
-                               
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-                                
-                                 <span class="fa-stack">
-                                     <i class="fas fa-cloud-rain gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-
-                                 <span class="fa-stack">
-                                     <i class="fas fa-volume-up  gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <strong class="fa-stack-1x square">71dB</strong>
-                                </span>
-
-                            </td>
-                            <td>2 a 4 dias úteis</td>
-                            <td>Em stock</td>
-                            <td>15€</td>
-                            </tr>
-                            <tr>
-                            
-                            <td>155/70 R13 75 T</td>
-                            <td>
-                                 <span class="fa-stack">
-                                     <i class="fas fa-gas-pump gaspump fa-stack-2x"></i>
-                                </span>
-                               
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-                                
-                                 <span class="fa-stack">
-                                     <i class="fas fa-cloud-rain gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-
-                                 <span class="fa-stack">
-                                     <i class="fas fa-volume-up gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <strong class="fa-stack-1x square">71dB</strong>
-                                </span>
-
-                            </td>
-                            <td>2 a 4 dias úteis</td>
-                            <td>Em stock</td>
-                            <td>15€</td>
-                            </tr>
-                            <tr>
-                            
-                            <td>155/70 R13 75 T</td>
-                            <td>
-                                 <span class="fa-stack"  data-toggle="tooltip" data-placement="bottom" title="Consumo de Comustível">
-                                     <i class="fas fa-gas-pump gaspump fa-stack-2x"></i>
-                                </span>
-                               
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-                                
-                                 <span class="fa-stack" data-toggle="tooltip" data-placement="bottom" title="Aderência à chuva">
-                                     <i class="fas fa-cloud-rain gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-
-                                 <span class="fa-stack" data-toggle="tooltip" data-placement="bottom" title="ruído externo em decibéis">
-                                     <i class="fas fa-volume-up  gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <strong class="fa-stack-1x square">71dB</strong>
-                                </span>
-
-                            </td>
-                            <td>2 a 4 dias úteis</td>
-                            <td>Em stock</td>
-                            <td>15€</td>
-                            </tr>
-                            <tr>
-                            
-                            <td>155/70 R13 75 T</td>
-                            <td>
-                                 <span class="fa-stack"  data-toggle="tooltip" data-placement="bottom" title="Consumo de Comustível">
-                                     <i class="fas fa-gas-pump gaspump fa-stack-2x"></i>
-                                </span>
-                               
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-                                
-                                 <span class="fa-stack" data-toggle="tooltip" data-placement="bottom" title="Aderência à chuva">
-                                     <i class="fas fa-cloud-rain gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-
-                                 <span class="fa-stack" data-toggle="tooltip" data-placement="bottom" title="ruído externo em decibéis">
-                                     <i class="fas fa-volume-up  gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <strong class="fa-stack-1x square">71dB</strong>
-                                </span>
-
-                            </td>
-                            <td>2 a 4 dias úteis</td>
-                            <td>Em stock</td>
-                            <td>15€</td>
-                            </tr>
-                            <tr>
-                            
-                            <td>155/70 R13 75 T</td>
-                            <td>
-                                 <span class="fa-stack"  data-toggle="tooltip" data-placement="bottom" title="Consumo de Comustível">
-                                     <i class="fas fa-gas-pump gaspump fa-stack-2x"></i>
-                                </span>
-                               
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-                                
-                                 <span class="fa-stack" data-toggle="tooltip" data-placement="bottom" title="Aderência à chuva">
-                                     <i class="fas fa-cloud-rain gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-
-                                 <span class="fa-stack" data-toggle="tooltip" data-placement="bottom" title="ruído externo em decibéis">
-                                     <i class="fas fa-volume-up  gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <strong class="fa-stack-1x square">71dB</strong>
-                                </span>
-
-                            </td>
-                            <td>2 a 4 dias úteis</td>
-                            <td>Em stock</td>
-                            <td>15€</td>
-                            </tr>
-                            <tr>
-                            
-                            <td>155/70 R13 75 T</td>
-                            <td>
-                                 <span class="fa-stack"  data-toggle="tooltip" data-placement="bottom" title="Consumo de Comustível">
-                                     <i class="fas fa-gas-pump gaspump fa-stack-2x"></i>
-                                </span>
-                               
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-                                
-                                 <span class="fa-stack" data-toggle="tooltip" data-placement="bottom" title="Aderência à chuva">
-                                     <i class="fas fa-cloud-rain gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-bookmark fa-stack-2x bookmark"></i>
-                                    <strong class="fa-stack-1x calendar-text">A</strong>
-                                </span>
-
-                                 <span class="fa-stack" data-toggle="tooltip" data-placement="bottom" title="ruído externo em decibéis">
-                                     <i class="fas fa-volume-up  gaspump fa-stack-2x"></i>
-                                </span>
-
-                                <span class="fa-stack">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <strong class="fa-stack-1x square">71dB</strong>
-                                </span>
-
-                            </td>
-                            <td>2 a 4 dias úteis</td>
-                            <td>Em stock</td>
-                            <td>15€</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-           
-            
-    </section>
-
-  
-  <footer>
-        <div class="container">
-            <div class="row col_footer">
+            <div class="row">
                 <div class="col-md-12">
-                        © 2018 Copyright:
-                            <a href="#" class="site_link"> nomesite.com</a>
+                    <div class="thumbnail" style="padding: 0px;">
+                        <img src="<?= base_url('assets/uploads/'.$info_pneu[0]->foto_pneu);?>" alt="<?= $info_pneu[0]->nome_pneu?>" class="pneu_img"/>
+                        <div class="row_text">
+                            <?= $info_pneu[0]->marca ?>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+                
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                
+                <div class="col-md-12">
+                    <div>
+                        <div class="home_text">
+                            <?= $info_pneu[0]->descricao?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="thumbnail" style="padding: 0px;" >
+                <div class="retangulo">
+                    <?= $info_pneu[0]->preco?> CHF
+                </div>
+                <div class="caption">
+                    <div data-toggle="tooltip" data-placement="bottom" title="Consumo de Comustível" style="text-align: center;margin: 15px 0px">
+                        <span class="fa-stack"  >
+                            <i class="fas fa-gas-pump gaspump fa-stack-2x"></i>
+                        </span>
+                        
+                        <span class="fa-stack">
+                            <i class="fas fa-bookmark fa-stack-2x bookmark-<?= $info_pneu[0]->consumo?>"></i>
+                            <strong class="fa-stack-1x calendar-text"><?= $info_pneu[0]->consumo?></strong>
+                        </span>
+                    </div>
+                    <div data-toggle="tooltip" data-placement="bottom" title="Aderência à chuva" style="text-align: center;margin: 15px 0px">
+                        <span class="fa-stack" >
+                                <i class="fas fa-cloud-rain gaspump fa-stack-2x"></i>
+                        </span>
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-         <script src="myjs.js"></script>
+                        <span class="fa-stack">
+                            <i class="fas fa-bookmark fa-stack-2x bookmark-<?= $info_pneu[0]->aderencia?>"></i>
+                            <strong class="fa-stack-1x calendar-text"><?= $info_pneu[0]->aderencia?></strong>
+                        </span>
+                    </div>
+                                                
+                    <div data-toggle="tooltip" data-placement="bottom" title="ruído externo em decibéis" style="text-align: center;margin: 15px 0px">
+                        <span class="fa-stack" >
+                            <i class="fas fa-volume-up  gaspump fa-stack-2x"></i>
+                        </span>
+        
+                        <span class="fa-stack">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <strong class="fa-stack-1x square"><?= $info_pneu[0]->ruido?>dB</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>           
+    
+                                 
+                               
+        </div>
+    </div>
+    <div class="clearfix spacing-30"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Voir aussi</h3>
+        </div>
 
-    </footer>
-
-</body>
-
-</html>
+        <?php 
+        if($veja_tambem == null){
+           echo 'Aucun résultat similaire';
+        } else {
+        foreach($veja_tambem as $row){?>
+            <div class="col-md-3">
+                <a href="<?= base_url('descricao/pneu/'.$row->id_pneu);?>" class="thumbnail" style="padding: 0; text-decoration:none; color: inherit">
+                    <img src="<?= base_url('assets/uploads/'.$row->foto_pneu);?>" style="max-width:100%; " alt="">
+                    <div class="row_text"><?= $row->nome_pneu ?> | <?= $row->altura?>/<?= $row->largura?> R<?= $row->raio?> <?= $row->indice?> T</div>
+                </a>
+            </div>
+        <?php }
+        }?>
+    </div>
+</div>
+<div class="spacing-20"></div>
+           
+    
